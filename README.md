@@ -19,3 +19,13 @@ On retrouve donc 4 types de membres :
 
 ### Users stories
 
+#### Générale
+
+- En tant qu'utilisateur de la plateforme, je veux pouvoir m'inscrire afin de pouvoir accéder aux fonctionnalités du service. 
+- En tant qu'utilisateur de la plateforme, je veux pouvoir me connecer afin d'accéder à mon profil et aux fonctionnalités. 
+
+#### Personne agée
+
+- En tant que personne agée, je veux pouvoir renseigner mes données de santé afin de les rendre accessible aux personnes compétentes. 
+- En tant que personne agée, je veux pouvoir consulter mes données afin de pouvoir les comparer aux précédentes. 
+
