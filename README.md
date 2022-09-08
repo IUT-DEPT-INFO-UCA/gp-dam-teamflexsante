@@ -80,4 +80,8 @@ On retrouve donc 4 types de membres :
 - Graphique temporelle (1 an, 6 mois, 3 mois, 1 mois, 1 semaine, 1 jour) pour toutes les données de santé.
 - Chiffres actuelles
 
+## Maquette et Architecture du projet
+
+Figma : https://www.figma.com/file/P7wwaswyUXCcbBPLqaTSeY/FlexSante?node-id=0%3A1
+
 
