@@ -25,6 +25,7 @@ On retrouve donc 4 types de membres :
 - En tant qu'utilisateur de la plateforme web, je veux pouvoir me connecter afin d'accéder à mon profil et aux fonctionnalités. 
 - En tant qu'utilisateur de la plateforme web, je veux pouvoir compléter mes informations personnelles afin de créer un profil. 
 - En tant qu'utilisateur de la plateforme web, je veux pouvoir consulter les profils des membres de mon cercle personnel afin de les avoir à disposition si besoin. 
+- En tant qu'utilisateur de la plateforme web, je veux pouvoir installer la plateforme en tant que PWA afin d'y accéder facilement sur mon téléphone.
 
 #### Personne agée
 
