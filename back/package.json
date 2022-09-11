@@ -17,6 +17,7 @@
     "fastify": "^4.5.3"
   },
   "devDependencies": {
+    "eslint": "^8.23.0",
     "nodemon": "^2.0.19"
   }
 }
