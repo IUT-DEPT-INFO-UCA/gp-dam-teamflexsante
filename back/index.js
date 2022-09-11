@@ -1,4 +1,5 @@
-import Fastify, { fastify } from "fastify"
+/* eslint-disable no-undef */
+import Fastify from "fastify"
 import FastifyEnv from "@fastify/env"
 import fastifyMongodb from "@fastify/mongodb"
 
@@ -40,7 +41,9 @@ const initialize = async () => {
 const main = async () => {
   try {
     await app.ready()
-    await app.listen(process.env.PORT)
+    await app.listen({ port: 3000 }).then(() => {
+      console.log(`Server listening at  http://localhost:${app.server.address().port}`)
+    })
   } catch (error) {
     app.log.error(error)
     process.exit(1)
