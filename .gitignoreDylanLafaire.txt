@@ -55,3 +55,9 @@ lint/intermediates/
 lint/generated/
 lint/outputs/
 lint/tmp/
+.DS_Store
+back/node_modules/
+
+# External native build folder generated in Android Studio 2.2 and later
+.externalNativeBuild
+.cxx/
