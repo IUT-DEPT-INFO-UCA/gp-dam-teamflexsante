@@ -2,6 +2,8 @@
 import Fastify from "fastify"
 import FastifyEnv from "@fastify/env"
 import fastifyMongodb from "@fastify/mongodb"
+import { routes } from "./routes.js"
+import { tests } from "./test/index.js"
 
 const schema = {
   type: "object",
@@ -16,7 +18,9 @@ const schema = {
 const options = {
   confKey: "config",
   schema,
-  dotenv: true,
+  dotenv: {
+    path: process.env.NODE_ENV === 'test' ? '.env.test' : '.env',
+  },
   data: process.env,
 }
 
@@ -24,9 +28,7 @@ const app = Fastify({
   logger: true,
 })
 
-app.get("/", function (request, reply) {
-  reply.send("Hello World")
-})
+routes(app)
 
 const initialize = async () => {
   app.register(FastifyEnv, options)
@@ -51,4 +53,11 @@ const main = async () => {
 }
 
 initialize()
-main()
+
+if (process.env.NODE_ENV !== 'test') {
+  main()
+} else {
+  tests(app)
+}
+
+
