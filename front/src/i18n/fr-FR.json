@@ -1,5 +1,14 @@
 {
   "translation": {
-    "home": "Accueil"
+    "home": "Accueil",
+    "app.name": "FlexSanté",
+    "header.login": "Connexion",
+    "header.account": "Mon compte",
+    "login.title": "Se connecter",
+    "login.email": "Email",
+    "login.password": "Mot de passe",
+    "login.submit": "Connexion",
+    "login.forgotPassword": "Mot de passe oublié ?",
+    "login.noAccount": "Pas de compte ? Inscrivez-vous !"
   }
 }
