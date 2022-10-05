@@ -65,6 +65,7 @@ const Register = () => {
             id="name"
             label={t('register.name')}
             name="name"
+            autoFocus
           />
           <TextField
             margin="normal"
@@ -138,7 +139,6 @@ const Register = () => {
             id="email"
             label={t('register.email')}
             name="email"
-            autoFocus
           />
           <TextField
             margin="normal"
