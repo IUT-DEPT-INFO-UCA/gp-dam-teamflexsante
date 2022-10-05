@@ -9,6 +9,21 @@
     "login.password": "Password",
     "login.submit": "Login",
     "login.forgotPassword": "Forgot your password?",
-    "login.noAccount": "No account? Sign up" 
+    "login.noAccount": "No account? Sign up",
+    "register.title": "Registration",
+    "register.name": "Name",
+    "register.surname": "Surname",
+    "register.submit": "Register",
+    "register.gender": "Gender",
+    "register.gender.man": "Man",
+    "register.gender.woman": "Woman",
+    "register.gender.other": "Other",
+    "register.dob": "Date of Birth",
+    "register.adress": "Adress",
+    "register.adress2": "Complement",
+    "register.postcode": "Postcode",
+    "register.city": "City",
+    "register.email": "Email",
+    "register.password": "Password"
   }
 }
