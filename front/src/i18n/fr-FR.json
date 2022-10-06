@@ -9,6 +9,21 @@
     "login.password": "Mot de passe",
     "login.submit": "Connexion",
     "login.forgotPassword": "Mot de passe oublié ?",
-    "login.noAccount": "Pas de compte ? Inscrivez-vous !"
+    "login.noAccount": "Pas de compte ? Inscrivez-vous !",
+    "register.title": "Inscription",
+    "register.name": "Prénom",
+    "register.surname": "Nom",
+    "register.submit": "S'inscrire",
+    "register.gender": "Sexe",
+    "register.gender.man": "Homme",
+    "register.gender.woman": "Femme",
+    "register.gender.other": "Autre",
+    "register.dob": "Date de naissance",
+    "register.adress": "Adresse",
+    "register.adress2": "Complément d'adresse",
+    "register.postcode": "Code Postal",
+    "register.city": "Ville",
+    "register.email": "Courriel",
+    "register.password": "Mot de passe"
   }
 }
