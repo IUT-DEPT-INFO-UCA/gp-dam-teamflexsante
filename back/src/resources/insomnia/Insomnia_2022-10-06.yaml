@@ -1,0 +1,129 @@
+_type: export
+__export_format: 4
+__export_date: 2022-10-06T13:59:04.610Z
+__export_source: insomnia.desktop.app:v2022.6.0
+resources:
+  - _id: req_5f97f3743b4a49d8802b22e2ed2bf347
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1665064660340
+    created: 1665059654196
+    url: "{{ _.url }}/user/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "test@test.com",
+        	"password": "Azerty12"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+    authentication: {}
+    metaSortKey: -1665059654196
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_901f7c7b5a124710977744e5b540915d
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1665059642517
+    created: 1663659795870
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1663659795870
+    _type: request_group
+  - _id: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    parentId: null
+    modified: 1663659759931
+    created: 1663659759931
+    name: FlexSante
+    description: ""
+    scope: collection
+    _type: workspace
+  - _id: req_385a93b2fa8e44ca9237453ff57fc95b
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1665064661211
+    created: 1663659797397
+    url: "{{ _.url }}/user/register"
+    name: Register
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"firstname": "Prénom",
+        	"lastname": "Nom",
+        	"email": "test@test.com",
+        	"password": "Azerty12",
+        	"gender": "men",
+        	"birthdate": "{% now 'millis', '' %}",
+        	"phone": "0617743687",
+        	"address": "4 Rue de la Liberté, Nice",
+        	"role": "patient"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_da4e3a1c1c5e4192ae91d225a3bc956f
+    authentication: {}
+    metaSortKey: -1663659797397
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_eefbb254a7d520188da296bb7bcc23066c1f3f46
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1663659819389
+    created: 1663659759938
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1663659759938
+    _type: environment
+  - _id: jar_eefbb254a7d520188da296bb7bcc23066c1f3f46
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1663659759940
+    created: 1663659759940
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_b8aab48d98554b0a9a182e51181fcb18
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1663659759934
+    created: 1663659759934
+    fileName: FlexSante
+    contents: ""
+    contentType: yaml
+    _type: api_spec
+  - _id: env_f50c84b232a549f1890dc2d8c2fdced5
+    parentId: env_eefbb254a7d520188da296bb7bcc23066c1f3f46
+    modified: 1663659917139
+    created: 1663659814238
+    name: local
+    data:
+      url: http://localhost:3000
+    dataPropertyOrder:
+      "&":
+        - url
+    color: null
+    isPrivate: false
+    metaSortKey: 1663659814238
+    _type: environment
