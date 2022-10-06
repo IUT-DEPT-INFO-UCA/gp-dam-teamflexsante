@@ -82,8 +82,6 @@ export class UserService {
       throw new HttpException('User not found', 400);
     }
 
-    userFound.token = generateRandomToken();
-
-    return userFound.save();
+    return userFound;
   }
 }
