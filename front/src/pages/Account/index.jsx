@@ -1,81 +1,59 @@
-import { Box, Card, Divider, Typography } from '@mui/material'
+import { Box, Tab, Tabs } from '@mui/material'
 import React from 'react'
+import FeelingForm from '../../components/FeelingForm'
+import HealthInfo from '../../components/HealthInfo'
+import PersonalInfo from '../../components/PersonalInfo'
 
 import './styles.css'
 
-const Account = () => {
+function TabPanel(props) {
+  // eslint-disable-next-line react/prop-types
+  const { children, value, index, ...other } = props
+
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '80vh',
-        backgroundColor: 'background.default'
-      }}>
-      <Card
-        sx={{
-          width: '100%',
-          maxWidth: 500,
-          padding: 3
-        }}>
-        {/*   Le Nom    */}
-        <Typography component="h1" variant="h5">
-          Nom :
-        </Typography>
-        <Typography component="p" variant="p" className="text">
-          riri
-        </Typography>
-        <Divider className="divider" />
-        {/*   Le Prénom    */}
-        <Typography component="h1" variant="h5">
-          Prénom :
-        </Typography>
-        <Typography component="p" variant="p">
-          toto
-        </Typography>
-        <Divider className="divider" />
-        {/*   Le Sexe    */}
-        <Typography component="h1" variant="h5">
-          Sexe :
-        </Typography>
-        <Typography component="p" variant="p">
-          Male
-        </Typography>
-        <Divider className="divider" />
-        {/*   L'Age    */}
-        <Typography component="h1" variant="h5">
-          Age :
-        </Typography>
-        <Typography component="p" variant="p">
-          86 ans
-        </Typography>
-        <Divider className="divider" />
-        {/*   L'Email    */}
-        <Typography component="h1" variant="h5">
-          Email :
-        </Typography>
-        <Typography component="p" variant="p">
-          toto.riri@gmail.com
-        </Typography>
-        <Divider className="divider" />
-        {/*   Numéro de téléphone    */}
-        <Typography component="h1" variant="h5">
-          Numéro de téléphone :
-        </Typography>
-        <Typography component="p" variant="p">
-          06 75 83 96 64
-        </Typography>
-        <Divider className="divider" />
-        {/*   l'Adresse    */}
-        <Typography component="h1" variant="h5">
-          Adresse :
-        </Typography>
-        <Typography component="p" variant="p">
-          12 rue des Polites
-        </Typography>
-      </Card>
-    </Box>
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}>
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  )
+}
+
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  }
+}
+
+const Account = () => {
+  const [value, setValue] = React.useState(0)
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue)
+  }
+  return (
+    <div>
+      <Box className="AccountSelector" sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="Information Personnel" {...a11yProps(0)} />
+          <Tab label="Diagrame" {...a11yProps(1)} />
+          <Tab label="Historique" {...a11yProps(2)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <PersonalInfo />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <HealthInfo />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <FeelingForm />
+      </TabPanel>
+    </div>
   )
 }
 
