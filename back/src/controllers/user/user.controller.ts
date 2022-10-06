@@ -1,4 +1,4 @@
-import { Controller, Post, Req } from '@nestjs/common';
+import { Controller, Post, Req, Get } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from './user.service';
 
@@ -46,6 +46,16 @@ export class UserController {
         email,
         password,
       }),
+    };
+  }
+
+  @Get()
+  async getUserByToken(@Req() request: Request) {
+    const { authorization } = request.headers;
+
+    return {
+      message: '3',
+      result: await this.userService.getUserByToken(authorization as string),
     };
   }
 }
