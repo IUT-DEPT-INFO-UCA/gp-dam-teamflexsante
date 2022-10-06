@@ -32,6 +32,12 @@ const Register = () => {
     setSexe(event.target.value)
   }
 
+  const [state, setState] = React.useState('')
+
+  const handleChangeState = (event) => {
+    setState(event.target.value)
+  }
+
   const [value, setValue] = React.useState(dayjs())
 
   const handleChangeTitle = (newValue) => {
@@ -58,6 +64,18 @@ const Register = () => {
           {t('register.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <FormControl fullWidth required>
+            <InputLabel id="state">{t('register.state')}</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="state"
+              value={state}
+              onChange={handleChangeState}>
+              <MenuItem value={'patient'}>{t('register.state.patient')}</MenuItem>
+              <MenuItem value={'family'}>{t('register.state.family')}</MenuItem>
+              <MenuItem value={'nurse'}>{t('register.state.nurse')}</MenuItem>
+            </Select>
+          </FormControl>
           <TextField
             margin="normal"
             required
@@ -75,19 +93,21 @@ const Register = () => {
             label={t('register.surname')}
             id="surname"
           />
-          <FormControl fullWidth required margin="normal">
-            <InputLabel id="gender">{t('register.gender')}</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="gender"
-              value={sexe}
-              onChange={handleChange}>
-              <MenuItem value={'man'}>{t('register.gender.man')}</MenuItem>
-              <MenuItem value={'woman'}>{t('register.gender.woman')}</MenuItem>
-              <MenuItem value={'other'}>{t('register.gender.other')}</MenuItem>
-            </Select>
-          </FormControl>
-          <Box sx={{ my: 1 }}>
+          <Box sx={{ mt: 2, mb: 3 }}>
+            <FormControl fullWidth required>
+              <InputLabel id="gender">{t('register.gender')}</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="gender"
+                value={sexe}
+                onChange={handleChange}>
+                <MenuItem value={'man'}>{t('register.gender.man')}</MenuItem>
+                <MenuItem value={'woman'}>{t('register.gender.woman')}</MenuItem>
+                <MenuItem value={'other'}>{t('register.gender.other')}</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
+          <Box sx={{ mt: 3, mb: 1 }}>
             <LocalizationProvider dateAdapter={AdapterDayjs} required margin="normal">
               <Stack>
                 <MobileDatePicker
@@ -104,16 +124,16 @@ const Register = () => {
             margin="normal"
             required
             fullWidth
-            name="adress"
-            label={t('register.adress')}
-            id="adress"
+            name="address"
+            label={t('register.address')}
+            id="address"
           />
           <TextField
             margin="normal"
             fullWidth
-            name="adress2"
-            label={t('register.adress2')}
-            id="adress2"
+            name="address2"
+            label={t('register.address2')}
+            id="address2"
           />
           <TextField
             margin="normal"
