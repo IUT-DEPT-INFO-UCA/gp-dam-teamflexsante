@@ -1,10 +1,14 @@
 import React, { useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom'
+
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
+import { RELOAD_USER } from '../redux/store/user/actions'
 import { clearError, clearValidation } from '../redux/store/app/slice'
 import { routes } from '../router/routes'
+import history from '../router/history'
 
 import Error from '../components/Error'
 import Validation from '../components/Validation'
@@ -16,11 +20,12 @@ import ForgotPassword from '../pages/ForgotPassword'
 import Account from '../pages/Account'
 
 const Layout = (props) => {
-  const { validation, error, resetError, resetValidation, user } = props
+  const { validation, error, resetError, resetValidation, user, reloadUser } = props
 
   useEffect(() => {
     resetError()
     resetValidation()
+    reloadUser()
   }, [resetError, resetValidation])
 
   if (error || validation) {
@@ -31,7 +36,7 @@ const Layout = (props) => {
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <Validation validation={validation} resetValidation={resetValidation} />
       <Error error={error} resetError={resetError} />
       <Header isConnected={user !== null} />
@@ -42,7 +47,7 @@ const Layout = (props) => {
         <Route path={routes.forgotPassword} element={<ForgotPassword />} />
         <Route path={routes.account} element={<Account />} />
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   )
 }
 
@@ -51,7 +56,8 @@ Layout.propTypes = {
   error: PropTypes.string.isRequired,
   user: PropTypes.object.isRequired,
   resetError: PropTypes.func.isRequired,
-  resetValidation: PropTypes.func.isRequired
+  resetValidation: PropTypes.func.isRequired,
+  reloadUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
@@ -62,7 +68,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   resetError: () => dispatch({ type: clearError }),
-  resetValidation: () => dispatch({ type: clearValidation })
+  resetValidation: () => dispatch({ type: clearValidation }),
+  reloadUser: () => dispatch({ type: RELOAD_USER })
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout)
