@@ -1,9 +1,11 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { UserInterface, UserLoginInterface } from './user.interface';
-import { User, UserDocument } from '../../schemas/user.schema';
 import mongoose, { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+
+import { UserInterface, UserLoginInterface } from './user.interface';
+import { User, UserDocument } from '../../schemas/user.schema';
+import { generateRandomToken } from '../../utils/token';
 
 const saltOrRounds = 10;
 
@@ -69,6 +71,19 @@ export class UserService {
       throw new HttpException('Invalid password', 400);
     }
 
-    return userFound;
+    userFound.token = generateRandomToken();
+
+    return userFound.save();
+  }
+
+  async getUserByToken(token: string): Promise<UserDocument> {
+    const userFound = await this.userModel.findOne({ token });
+    if (!userFound) {
+      throw new HttpException('User not found', 400);
+    }
+
+    userFound.token = generateRandomToken();
+
+    return userFound.save();
   }
 }

@@ -56,6 +56,22 @@ describe('UserController', () => {
     expect(await controller.login(req)).toHaveProperty('result._id');
   });
 
+  it('should get a user by token', async () => {
+    const user = UserMock;
+    const userFromDb = await database
+      .model('User')
+      .findOne({ email: user.email });
+    const req = httpMocks.createRequest({
+      method: 'GET',
+      url: '/user',
+      headers: {
+        authorization: userFromDb.token,
+      },
+    });
+
+    expect(await controller.getUserByToken(req)).toHaveProperty('result._id');
+  });
+
   afterAll(async () => {
     // drop database
     await database.dropDatabase();

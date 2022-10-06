@@ -1,29 +1,25 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-06T13:59:04.610Z
+__export_date: 2022-10-06T14:35:45.658Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
-  - _id: req_5f97f3743b4a49d8802b22e2ed2bf347
+  - _id: req_3409ff1f5cdc45558cea31ece44c5417
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665064660340
-    created: 1665059654196
-    url: "{{ _.url }}/user/login"
-    name: Login
+    modified: 1665066775250
+    created: 1665066192040
+    url: "{{ _.url }}/user"
+    name: GetUserByToken
     description: ""
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"email": "test@test.com",
-        	"password": "Azerty12"
-        }
+    method: GET
+    body: {}
     parameters: []
     headers:
-      - name: Content-Type
-        value: application/json
+      - id: pair_1ad231c2e97a481ebcc8a8dd5afd1b4d
+        name: authorization
+        value: c28nyt9yhg
+        description: ""
     authentication: {}
-    metaSortKey: -1665059654196
+    metaSortKey: -1665066192040
     isPrivate: false
     settingStoreCookies: true
     settingSendCookies: true
@@ -50,6 +46,36 @@ resources:
     description: ""
     scope: collection
     _type: workspace
+  - _id: req_5f97f3743b4a49d8802b22e2ed2bf347
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1665066428027
+    created: 1665059654196
+    url: "{{ _.url }}/user/login"
+    name: Login
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email": "test@test.com",
+        	"password": "Azerty12"
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_80814150eb7640c3946141c33fb2299b
+    authentication: {}
+    metaSortKey: -1665059654196
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
   - _id: req_385a93b2fa8e44ca9237453ff57fc95b
     parentId: fld_901f7c7b5a124710977744e5b540915d
     modified: 1665064661211
