@@ -3,12 +3,25 @@ import mongoose, { Document, now } from 'mongoose';
 
 export type UserDocument = User & Document;
 
+export type Notification = {
+  type: string;
+  from: User;
+  date: Date;
+};
+
+export enum Role {
+  PATIENT = 'patient',
+  FAMILY = 'family',
+  DOCTOR = 'doctor',
+  NURSE = 'nurse',
+}
+
 @Schema()
 export class User {
   @Prop({ type: mongoose.Schema.Types.ObjectId })
   _id?: string;
 
-  @Prop({ required: true, enum: ['patient', 'family', 'doctor', 'nurse'] })
+  @Prop({ required: true, enum: Role })
   role: string;
 
   @Prop({ required: true })
@@ -37,6 +50,14 @@ export class User {
 
   @Prop()
   token?: string;
+
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
+  })
+  group: User[];
+
+  @Prop()
+  notifications?: Notification[];
 
   @Prop({ default: now() })
   createdAt?: Date;

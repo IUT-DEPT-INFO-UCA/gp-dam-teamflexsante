@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './controllers/user/user.module';
 import { TransformInterceptor } from './utils/transform.interceptor';
+import { GroupController } from './controllers/group/group.controller';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { TransformInterceptor } from './utils/transform.interceptor';
     // Custom Modules
     UsersModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, GroupController],
   providers: [
     AppService,
     {
