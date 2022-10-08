@@ -7,6 +7,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { UsersModule } from './controllers/user/user.module';
 import { TransformInterceptor } from './utils/transform.interceptor';
+import { GroupsModule } from './controllers/group/group.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { TransformInterceptor } from './utils/transform.interceptor';
     MongooseModule.forRoot(process.env.DATABASE_URL),
     // Custom Modules
     UsersModule,
+    GroupsModule,
   ],
   controllers: [AppController],
   providers: [

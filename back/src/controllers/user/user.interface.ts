@@ -9,6 +9,8 @@ export interface UserInterface {
   address: string;
   phone: string;
   role: string;
+  group?: UserInterface[];
+  notifications?: Notification[];
   createdAt?: Date;
   updatedAt?: Date;
 }
