@@ -4,7 +4,12 @@ import mongoose, { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 import { UserInterface, UserLoginInterface } from './user.interface';
-import { User, UserDocument } from '../../schemas/user.schema';
+import {
+  FeelingData,
+  Role,
+  User,
+  UserDocument,
+} from '../../schemas/user.schema';
 import { generateRandomToken } from '../../utils/token';
 
 const saltOrRounds = 10;
@@ -83,5 +88,31 @@ export class UserService {
     }
 
     return userFound;
+  }
+
+  async addFeeling(token: string, feeling: FeelingData): Promise<UserDocument> {
+    const userFound = await this.userModel.findOne({ token });
+    if (!userFound) {
+      throw new HttpException('User not found', 400);
+    }
+
+    if (userFound.role !== Role.PATIENT) {
+      throw new HttpException('User is not a patient', 400);
+    }
+
+    if (
+      !feeling.date ||
+      !feeling.tiredness ||
+      !feeling.stress ||
+      !feeling.happiness ||
+      !feeling.pain ||
+      !feeling.anxiety
+    ) {
+      throw new HttpException('Missing required fields', 400);
+    }
+
+    userFound.health.feeling.push(feeling);
+    userFound.markModified('health.feeling');
+    return userFound.save();
   }
 }

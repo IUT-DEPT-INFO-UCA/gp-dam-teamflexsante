@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-08T13:34:57.657Z
+__export_date: 2022-10-08T14:30:01.277Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_36117927a8254178b6a4d5334cb54d62
@@ -180,6 +180,56 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_1337b65fdcc94eeca98ceebc74da11e6
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1665239247949
+    created: 1665238712269
+    url: "{{ _.url }}/user/feeling"
+    name: AddFeelingFromForm
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"feeling": {
+        		"date": "{% now 'millis', '' %}",
+            "tiredness": 2,
+            "stress": 2,
+            "happiness": 3,
+            "anxiety": 1,
+            "pain": ["Back"]
+        	}
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+        id: pair_f27fe62727f94ed3bac5fdc7f45dd9ad
+      - id: pair_84487fa1d3274fcdba6fbbef2e89745b
+        name: Authorization
+        value: 5x4kk6pp0dvcwnbfycedbh
+        description: ""
+    authentication: {}
+    metaSortKey: -1665238712269
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_901f7c7b5a124710977744e5b540915d
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1665059642517
+    created: 1663659795870
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1663659795870
+    _type: request_group
   - _id: req_3409ff1f5cdc45558cea31ece44c5417
     parentId: fld_901f7c7b5a124710977744e5b540915d
     modified: 1665071889881
@@ -205,19 +255,9 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_901f7c7b5a124710977744e5b540915d
-    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
-    modified: 1665059642517
-    created: 1663659795870
-    name: User
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1663659795870
-    _type: request_group
   - _id: req_5f97f3743b4a49d8802b22e2ed2bf347
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665235197380
+    modified: 1665238905918
     created: 1665059654196
     url: "{{ _.url }}/user/login"
     name: Login
@@ -227,7 +267,7 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"email": "doctor@test.com",
+        	"email": "patient@test.com",
         	"password": "Azerty12"
         }
     parameters: []
@@ -247,7 +287,7 @@ resources:
     _type: request
   - _id: req_385a93b2fa8e44ca9237453ff57fc95b
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665233790178
+    modified: 1665238374495
     created: 1663659797397
     url: "{{ _.url }}/user/register"
     name: Register
@@ -259,7 +299,7 @@ resources:
         {
         	"firstname": "Prénom",
         	"lastname": "Nom",
-        	"email": "doctor@test.com",
+        	"email": "nurse@test.com",
         	"password": "Azerty12",
         	"gender": "men",
         	"birthdate": "{% now 'millis', '' %}",

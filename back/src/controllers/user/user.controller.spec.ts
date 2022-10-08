@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const httpMocks = require('node-mocks-http');
 
-import { User, UserSchema } from '../../schemas/user.schema';
+import { TypeOfPain, User, UserSchema } from '../../schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserMock } from './user.mock';
 import { UserService } from './user.service';
@@ -28,10 +28,6 @@ describe('UserController', () => {
 
     controller = module.get<UserController>(UserController);
     database = await module.get(getConnectionToken());
-  });
-
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
   });
 
   it('should create a new user', async () => {
@@ -70,6 +66,34 @@ describe('UserController', () => {
     });
 
     expect(await controller.getUserByToken(req)).toHaveProperty('result._id');
+  });
+
+  it('should post a new feeling', async () => {
+    const user = UserMock;
+    const userFromDb = await database
+      .model('User')
+      .findOne({ email: user.email });
+    const req = httpMocks.createRequest({
+      method: 'POST',
+      url: '/user/feeling',
+      headers: {
+        authorization: userFromDb.token,
+      },
+      body: {
+        feeling: {
+          date: new Date(),
+          tiredness: 1,
+          stress: 2,
+          happiness: 3,
+          anxiety: 1,
+          pain: [TypeOfPain.Back],
+        },
+      },
+    });
+
+    expect(await controller.addFeeling(req)).toHaveProperty(
+      'result.health.feeling[0].date',
+    );
   });
 
   afterAll(async () => {

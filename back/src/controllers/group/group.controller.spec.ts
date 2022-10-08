@@ -74,10 +74,6 @@ describe('GroupController', () => {
     doctor = res4.result;
   });
 
-  it('should be defined', () => {
-    expect(controller).toBeDefined();
-  });
-
   it('should send a request to add a user to my group', async () => {
     const req = httpMocks.createRequest({
       method: 'POST',

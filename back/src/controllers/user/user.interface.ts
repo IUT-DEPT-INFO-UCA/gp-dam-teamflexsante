@@ -1,3 +1,5 @@
+import { Health, Notification } from '../../schemas/user.schema';
+
 export interface UserInterface {
   _id?: string;
   firstname: string;
@@ -11,6 +13,7 @@ export interface UserInterface {
   role: string;
   group?: UserInterface[];
   notifications?: Notification[];
+  health?: Health;
   createdAt?: Date;
   updatedAt?: Date;
 }
