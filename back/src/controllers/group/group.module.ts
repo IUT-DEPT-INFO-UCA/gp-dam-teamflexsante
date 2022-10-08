@@ -12,4 +12,4 @@ import { User, UserSchema } from '../../schemas/user.schema';
   controllers: [GroupController],
   providers: [GroupService],
 })
-export class UsersModule {}
+export class GroupsModule {}

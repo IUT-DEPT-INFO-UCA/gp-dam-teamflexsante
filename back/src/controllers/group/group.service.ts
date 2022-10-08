@@ -1,6 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { generateRandomToken } from '../../utils/token';
 import { Role, User, UserDocument } from '../../schemas/user.schema';
 
 @Injectable()
@@ -17,7 +18,14 @@ export class GroupService {
       throw new HttpException('User not found', 400);
     }
 
-    return user.group;
+    if (user.role === Role.PATIENT) {
+      return user.group;
+    } else {
+      return this.userModel.find({
+        role: Role.PATIENT,
+        group: { $elemMatch: { $eq: user } },
+      });
+    }
   }
 
   async requestAddUserToMyGroup(token: string, email: string) {
@@ -48,6 +56,7 @@ export class GroupService {
     }
 
     userToNotify.notifications.push({
+      id: generateRandomToken(),
       type: 'addRequest',
       from: user,
       date: new Date(),
@@ -84,6 +93,7 @@ export class GroupService {
     }
 
     userToNotify.notifications.push({
+      id: generateRandomToken(),
       type: 'joinRequest',
       from: user,
       date: new Date(),
@@ -92,7 +102,11 @@ export class GroupService {
     return userToNotify.save();
   }
 
-  async acceptAddUserToMyGroup(token: string, email: string) {
+  async acceptAddUserToMyGroup(
+    token: string,
+    email: string,
+    notificationId: string,
+  ) {
     const user = await this.userModel.findOne({ token });
 
     if (!user) {
@@ -104,6 +118,10 @@ export class GroupService {
         'User is not a patient so cannot accept add request',
         400,
       );
+    }
+
+    if (user.notifications.find((n) => n.id === notificationId) === undefined) {
+      throw new HttpException('Notification not found', 400);
     }
 
     const userToAdd = await this.userModel.findOne({ email });
@@ -120,11 +138,18 @@ export class GroupService {
     }
 
     user.group.push(userToAdd);
+    user.notifications = user.notifications.filter(
+      (n) => n.id !== notificationId,
+    );
 
     return user.save();
   }
 
-  async acceptJoinGroupOfUser(token: string, email: string) {
+  async acceptJoinGroupOfUser(
+    token: string,
+    email: string,
+    notificationId: string,
+  ) {
     const user = await this.userModel.findOne({ token });
 
     if (!user) {
@@ -136,6 +161,10 @@ export class GroupService {
         'User is a patient so cannot accept join request',
         400,
       );
+    }
+
+    if (user.notifications.find((n) => n.id === notificationId) === undefined) {
+      throw new HttpException('Notification not found', 400);
     }
 
     const userToJoin = await this.userModel.findOne({ email });
@@ -151,12 +180,12 @@ export class GroupService {
       );
     }
 
-    if (userToJoin.group === undefined) {
-      userToJoin.group = [];
-    }
-
     userToJoin.group.push(user);
+    user.notifications = user.notifications.filter(
+      (n) => n.id !== notificationId,
+    );
 
+    await user.save();
     return userToJoin.save();
   }
 }

@@ -18,7 +18,7 @@ describe('GroupController', () => {
   let patient: any;
   let doctor: any;
 
-  beforeAll(async () => {
+  beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
         // Import env variables
@@ -78,24 +78,127 @@ describe('GroupController', () => {
     expect(controller).toBeDefined();
   });
 
-  it('should add a user to a group', async () => {
+  it('should send a request to add a user to my group', async () => {
     const req = httpMocks.createRequest({
       method: 'POST',
-      url: '/group/accept/add',
+      url: '/group/request/add',
       headers: {
-        Authorization: patient.token,
+        authorization: patient.token,
       },
       body: {
         email: UserMockDoctor.email,
       },
     });
 
-    const res = await controller.acceptAddUserToMyGroup(req);
-    expect(res.result.group.length).toBe(1);
+    const res = await controller.requestAddUserToMyGroup(req);
+    expect(res.result.notifications.length).toBeGreaterThan(0);
+  });
+
+  it('should send a request to join a group', async () => {
+    const req = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/request/join',
+      headers: {
+        authorization: doctor.token,
+      },
+      body: {
+        email: UserMockPatient.email,
+      },
+    });
+
+    const res = await controller.requestJoinGroupOfUser(req);
+    expect(res.result.notifications.length).toBeGreaterThan(0);
+  });
+
+  it('should add a user to a group', async () => {
+    const req1 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/request/join',
+      headers: {
+        authorization: doctor.token,
+      },
+      body: {
+        email: UserMockPatient.email,
+      },
+    });
+
+    patient = (await controller.requestJoinGroupOfUser(req1)).result;
+
+    const req2 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/accept/add',
+      headers: {
+        Authorization: patient.token,
+      },
+      body: {
+        email: doctor.email,
+        notificationId: patient.notifications[0].id,
+      },
+    });
+
+    const res = await controller.acceptAddUserToMyGroup(req2);
+    expect(res.result.group.length).toBeGreaterThan(0);
+  });
+
+  it('should join the group of a user', async () => {
+    const req1 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/request/add',
+      headers: {
+        authorization: patient.token,
+      },
+      body: {
+        email: UserMockDoctor.email,
+      },
+    });
+
+    doctor = (await controller.requestAddUserToMyGroup(req1)).result;
+
+    const req = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/accept/join',
+      headers: {
+        authorization: doctor.token,
+      },
+      body: {
+        email: UserMockPatient.email,
+        notificationId: doctor.notifications[0].id,
+      },
+    });
+
+    const res = await controller.acceptJoinGroupOfUser(req);
+    expect(res.result.group.length).toBeGreaterThan(0);
   });
 
   it('should get the group of a user', async () => {
+    const req1 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/request/join',
+      headers: {
+        authorization: doctor.token,
+      },
+      body: {
+        email: UserMockPatient.email,
+      },
+    });
+
+    patient = (await controller.requestJoinGroupOfUser(req1)).result;
+
     const req2 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/group/accept/add',
+      headers: {
+        Authorization: patient.token,
+      },
+      body: {
+        email: doctor.email,
+        notificationId: patient.notifications[0].id,
+      },
+    });
+
+    await controller.acceptAddUserToMyGroup(req2);
+
+    const req3 = httpMocks.createRequest({
       method: 'GET',
       url: '/group',
       headers: {
@@ -103,11 +206,11 @@ describe('GroupController', () => {
       },
     });
 
-    const group = await controller.getGroup(req2);
+    const group = await controller.getGroup(req3);
     expect(group.result.length).toBe(1);
   });
 
-  afterAll(async () => {
+  afterEach(async () => {
     await database.dropDatabase();
     await database.close();
   });

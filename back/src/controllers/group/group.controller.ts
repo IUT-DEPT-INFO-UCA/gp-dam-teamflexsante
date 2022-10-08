@@ -47,13 +47,14 @@ export class GroupController {
   @Post('accept/add')
   async acceptAddUserToMyGroup(@Req() request: Request) {
     const { authorization } = request.headers;
-    const { email } = request.body;
+    const { email, notificationId } = request.body;
 
     return {
       message: '4',
       result: await this.groupService.acceptAddUserToMyGroup(
         authorization as string,
         email,
+        notificationId,
       ),
     };
   }
@@ -61,13 +62,14 @@ export class GroupController {
   @Post('accept/join')
   async acceptJoinGroupOfUser(@Req() request: Request) {
     const { authorization } = request.headers;
-    const { email } = request.body;
+    const { email, notificationId } = request.body;
 
     return {
       message: '5',
       result: await this.groupService.acceptJoinGroupOfUser(
         authorization as string,
         email,
+        notificationId,
       ),
     };
   }

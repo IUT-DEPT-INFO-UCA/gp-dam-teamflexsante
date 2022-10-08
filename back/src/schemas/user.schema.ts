@@ -4,6 +4,7 @@ import mongoose, { Document, now } from 'mongoose';
 export type UserDocument = User & Document;
 
 export type Notification = {
+  id: string;
   type: string;
   from: User;
   date: Date;
@@ -57,7 +58,7 @@ export class User {
   group: User[];
 
   @Prop()
-  notifications?: Notification[];
+  notifications: Notification[];
 
   @Prop({ default: now() })
   createdAt?: Date;
