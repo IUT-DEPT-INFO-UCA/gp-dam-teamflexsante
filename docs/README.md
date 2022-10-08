@@ -62,7 +62,12 @@ On retrouve donc 4 types de membres :
 
 - Rythme cardiaque
 - Tension
-- Sentiment personnel (fatigue, mal au ventre...)
+- Sentiment personnel
+  - Fatigue ressenti (1-5)
+  - Stress ressenti (1-5)
+  - Bien-être ressenti (1-5)
+  - Douleur ressenti (liste de douleurs possibles)
+  - Anxiété ressenti (1-5)
 - Niveau de stress
 - Oxygénation du sang
 - Rythme de sommeil

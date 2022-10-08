@@ -58,4 +58,18 @@ export class UserController {
       result: await this.userService.getUserByToken(authorization as string),
     };
   }
+
+  @Post('feeling')
+  async addFeeling(@Req() request: Request) {
+    const { authorization } = request.headers;
+    const { feeling } = request.body;
+
+    return {
+      message: '4',
+      result: await this.userService.addFeeling(
+        authorization as string,
+        feeling,
+      ),
+    };
+  }
 }

@@ -10,6 +10,39 @@ export type Notification = {
   date: Date;
 };
 
+export enum TypeOfPain {
+  'Head',
+  'Neck',
+  'Shoulder',
+  'Back',
+  'Elbow',
+  'Wrist',
+}
+
+type Data = {
+  number: number;
+  date: Date;
+};
+
+export type FeelingData = {
+  date: Date;
+  tiredness: number;
+  stress: number;
+  happiness: number;
+  anxiety: number;
+  pain: TypeOfPain[];
+};
+
+export type Health = {
+  heartRate: Data[];
+  bloodPressure: Data[];
+  bloodOxygen: Data[];
+  temperature: Data[];
+  sleep: Data[];
+  stress: Data[];
+  feeling: FeelingData[];
+};
+
 export enum Role {
   PATIENT = 'patient',
   FAMILY = 'family',
@@ -59,6 +92,20 @@ export class User {
 
   @Prop()
   notifications: Notification[];
+
+  @Prop({
+    type: mongoose.Schema.Types.Mixed,
+    default: {
+      heartRate: [],
+      bloodPressure: [],
+      bloodOxygen: [],
+      temperature: [],
+      sleep: [],
+      stress: [],
+      feeling: [],
+    },
+  })
+  health: Health;
 
   @Prop({ default: now() })
   createdAt?: Date;
