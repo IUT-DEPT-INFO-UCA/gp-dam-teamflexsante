@@ -67,6 +67,7 @@ export class UserService {
   async login(user: UserLoginInterface): Promise<UserDocument> {
     const { email, password } = user;
     const userFound = await this.userModel.findOne({ email });
+
     if (!userFound) {
       throw new HttpException('User not found', 400);
     }
@@ -114,5 +115,70 @@ export class UserService {
     userFound.health.feeling.push(feeling);
     userFound.markModified('health.feeling');
     return userFound.save();
+  }
+
+  async generate(): Promise<boolean> {
+    try {
+      const patients = await this.userModel.find({ role: Role.PATIENT });
+
+      patients.forEach(async (patient) => {
+        const heartRate = [];
+        const bloodPressure = [];
+        const bloodOxygen = [];
+        const temperature = [];
+        const sleep = [];
+        const stress = [];
+
+        for (let i = 0; i < 365; i++) {
+          heartRate.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            value: Math.floor(Math.random() * 130) + 50,
+          });
+          bloodPressure.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            systolic: Math.floor(Math.random() * 40) + 90,
+            diastolic: Math.floor(Math.random() * 30) + 60,
+          });
+          bloodOxygen.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            value: Math.floor(Math.random() * 15) + 85,
+          });
+          temperature.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            value: Math.floor(Math.random() * 350) + 365,
+          });
+          sleep.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            value: Math.floor(Math.random() * 10) + 1,
+          });
+          stress.push({
+            date: new Date(new Date().setDate(new Date().getDate() - i)),
+            value: Math.floor(Math.random() * 100),
+          });
+        }
+
+        patient.health.heartRate = heartRate;
+        patient.health.bloodPressure = bloodPressure;
+        patient.health.bloodOxygen = bloodOxygen;
+        patient.health.temperature = temperature;
+        patient.health.sleep = sleep;
+        patient.health.stress = stress;
+
+        // for some reason I need to have a callback here to assure that all data is saved
+        // otherwise it will only save the first patient
+        patient.save((err) => {
+          if (err) {
+            console.log(err);
+          } else {
+            console.log('Generated');
+          }
+        });
+      });
+
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
   }
 }

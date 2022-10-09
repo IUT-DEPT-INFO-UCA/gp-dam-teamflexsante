@@ -72,4 +72,12 @@ export class UserController {
       ),
     };
   }
+
+  @Get('generate')
+  async generate() {
+    return {
+      message: '5',
+      result: await this.userService.generate(),
+    };
+  }
 }
