@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-08T14:30:01.277Z
+__export_date: 2022-10-09T10:28:48.740Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_36117927a8254178b6a4d5334cb54d62
@@ -180,9 +180,40 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_213454342937426ea66f2c479a7912ef
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1665309934877
+    created: 1665309906533
+    url: "{{ _.url }}/user/generate"
+    name: GenerateFakeHealthData
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1665238712319
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_901f7c7b5a124710977744e5b540915d
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1665059642517
+    created: 1663659795870
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1663659795870
+    _type: request_group
   - _id: req_1337b65fdcc94eeca98ceebc74da11e6
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665239247949
+    modified: 1665309902787
     created: 1665238712269
     url: "{{ _.url }}/user/feeling"
     name: AddFeelingFromForm
@@ -220,16 +251,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_901f7c7b5a124710977744e5b540915d
-    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
-    modified: 1665059642517
-    created: 1663659795870
-    name: User
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1663659795870
-    _type: request_group
   - _id: req_3409ff1f5cdc45558cea31ece44c5417
     parentId: fld_901f7c7b5a124710977744e5b540915d
     modified: 1665071889881

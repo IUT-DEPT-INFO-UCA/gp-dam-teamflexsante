@@ -35,7 +35,11 @@ export type FeelingData = {
 
 export type Health = {
   heartRate: Data[];
-  bloodPressure: Data[];
+  bloodPressure: {
+    date: Date;
+    systolic: number;
+    diastolic: number;
+  }[];
   bloodOxygen: Data[];
   temperature: Data[];
   sleep: Data[];

@@ -24,7 +24,7 @@ describe('GroupController', () => {
         // Import env variables
         ConfigModule.forRoot(),
         // Database connexion
-        MongooseModule.forRoot(process.env.DATABASE_URL_TEST),
+        MongooseModule.forRoot(process.env.DATABASE_URL_TEST + '_group'),
         MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
       ],
       controllers: [GroupController, UserController],
