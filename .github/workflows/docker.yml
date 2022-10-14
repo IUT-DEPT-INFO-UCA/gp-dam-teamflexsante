@@ -39,4 +39,4 @@ jobs:
           context: back
           file: back/Dockerfile
           push: true
-          tags: pierraad/gp-lp-dam-flexsante:front-latest
+          tags: pierraad/gp-lp-dam-flexsante:back-latest
