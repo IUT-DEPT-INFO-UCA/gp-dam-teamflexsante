@@ -8,4 +8,4 @@
 
 ## Documentation
 
-La documentation est disponible dans le dossier ```docs```.
+La documentation détaillée est disponible dans le fichier ```README.md``` du dossier ```docs```.
