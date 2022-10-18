@@ -13,5 +13,5 @@ jobs:
     - name: Webhook
       uses: distributhor/workflow-webhook@v2
       with:
-        webhook_url: ${{ secrets.WEBHOOK_URL }}
-        webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
+        webhook_url: http://217.160.51.173:9000/hooks/FlexSante
+        webhook_secret: FlexFlex
