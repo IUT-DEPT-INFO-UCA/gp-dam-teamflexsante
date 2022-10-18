@@ -3,7 +3,7 @@ name: deploy
 # Only trigger, when the build workflow succeeded
 on:
   workflow_run:
-    workflows: ["docker"]
+    workflows: ["Publish docker"]
     types:
       - completed
       
