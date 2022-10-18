@@ -1,9 +1,7 @@
 version: '3'
 services:
     back:
-        build: 
-            context: ./back
-            dockerfile: Dockerfile
+        image: pierraad/gp-lp-dam-flexsante:back-latest
         environment:
             - DATABASE_URL=mongodb://db:27018/flexsante
         ports:
@@ -26,15 +24,11 @@ services:
             - flexsante-network
 
     web:
-        build: 
-            context: ./front
-            dockerfile: Dockerfile
+        image: pierraad/gp-lp-dam-flexsante:front-latest
         ports:
             - 4000:4000
         volumes:
-          - /usr/src/web/node_modules
-        env_file:
-            - ./front/.env
+            - /usr/src/web/node_modules
         networks:
             - flexsante-network
         depends_on:
