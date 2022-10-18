@@ -15,4 +15,4 @@ jobs:
       with:
         webhook_url: ${{ secrets.WEBHOOK_URL }}
         webhook_secret: ${{ secrets.WEBHOOK_SECRET }}
-        verbose: true
+        verify_ssl: false
