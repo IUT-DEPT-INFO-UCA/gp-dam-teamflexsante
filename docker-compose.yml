@@ -5,7 +5,7 @@ services:
         environment:
             - DATABASE_URL=mongodb://db:27018/flexsante
         ports:
-            - '3000:3000'
+            - '3124:3000'
         depends_on:
             - db
         volumes:
@@ -26,7 +26,7 @@ services:
     web:
         image: pierraad/gp-lp-dam-flexsante:front-latest
         ports:
-            - 4000:4000
+            - 4124:4000
         volumes:
             - /usr/src/web/node_modules
         networks:
