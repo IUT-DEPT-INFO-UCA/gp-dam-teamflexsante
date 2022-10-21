@@ -32,6 +32,7 @@
     "forgotPassword.title": "Mot de passe oublié ?",
     "forgotPassword.text": "Vous avez oublié votre mot de passe ? Pas de panique, même les plus grands acteurs ont des trous. Réinitialisons-le ensemble ! (évitez quand même le “12345”)",
     "forgotPassword.email": "Courriel",
-    "forgotPassword.submit": "Réinitialiser mon mot de passe"
+    "forgotPassword.submit": "Réinitialiser mon mot de passe",
+    "healthInfo.title": "Informations sur la santé"
   }
 }
