@@ -3,6 +3,7 @@ import React from 'react'
 import FeelingForm from '../../components/FeelingForm'
 import HealthInfo from '../../components/HealthInfo'
 import PersonalInfo from '../../components/PersonalInfo'
+import Personal_Circle from '../../components/Personal_Circle/index'
 
 import './styles.css'
 
@@ -42,6 +43,7 @@ const Account = () => {
           <Tab label="Information Personnel" {...a11yProps(0)} />
           <Tab label="Diagrame" {...a11yProps(1)} />
           <Tab label="Vos Sentiment" {...a11yProps(2)} />
+          <Tab label="Cercle Personnel" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <TabPanel value={value} index={0}>
@@ -52,6 +54,9 @@ const Account = () => {
       </TabPanel>
       <TabPanel value={value} index={2}>
         <FeelingForm />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <Personal_Circle />
       </TabPanel>
     </div>
   )
