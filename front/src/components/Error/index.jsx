@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Alert, Snackbar } from '@mui/material'
 
 const Error = (props) => {
   const { error, resetError } = props
@@ -8,11 +9,20 @@ const Error = (props) => {
     return null
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    resetError()
+  }
+
   return (
-    <div className="error">
-      <h1>{error}</h1>
-      <button onClick={resetError}>Close</button>
-    </div>
+    <Snackbar open={error !== ''} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+        {error}
+      </Alert>
+    </Snackbar>
   )
 }
 

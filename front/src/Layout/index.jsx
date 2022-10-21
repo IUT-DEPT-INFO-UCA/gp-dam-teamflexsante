@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { RELOAD_USER } from '../redux/store/user/actions'
-import { clearError, clearValidation } from '../redux/store/app/slice'
+import { CLEAR_ERROR, CLEAR_VALIDATION } from '../redux/store/app/slice'
 import { routes } from '../router/routes'
 import history from '../router/history'
 
@@ -67,8 +67,8 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  resetError: () => dispatch({ type: clearError }),
-  resetValidation: () => dispatch({ type: clearValidation }),
+  resetError: () => dispatch({ type: CLEAR_ERROR }),
+  resetValidation: () => dispatch({ type: CLEAR_VALIDATION }),
   reloadUser: () => dispatch({ type: RELOAD_USER })
 })
 
