@@ -4,7 +4,7 @@ import { ConfigModule } from '@nestjs/config';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const httpMocks = require('node-mocks-http');
 
-import { TypeOfPain, User, UserSchema } from '../../schemas/user.schema';
+import { User, UserSchema } from '../../schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserMock } from './user.mock';
 import { UserService } from './user.service';
@@ -169,7 +169,7 @@ describe('UserController', () => {
           stress: 2,
           happiness: 3,
           anxiety: 1,
-          pain: [TypeOfPain.Back],
+          note: 'note',
         },
       },
     });
@@ -191,7 +191,7 @@ describe('UserController', () => {
           stress: 2,
           happiness: 3,
           anxiety: 1,
-          pain: [TypeOfPain.Back],
+          note: 'note',
         },
       },
     });
@@ -209,7 +209,7 @@ describe('UserController', () => {
           date: new Date(),
           tiredness: 1,
           anxiety: 1,
-          pain: [TypeOfPain.Back],
+          note: 'note',
         },
       },
     });

@@ -106,7 +106,6 @@ export class UserService {
       !feeling.tiredness ||
       !feeling.stress ||
       !feeling.happiness ||
-      !feeling.pain ||
       !feeling.anxiety
     ) {
       throw new HttpException('Missing required fields', 400);

@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Alert, Snackbar } from '@mui/material'
 
 const Validation = (props) => {
   const { validation, resetValidation } = props
@@ -8,11 +9,20 @@ const Validation = (props) => {
     return null
   }
 
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    resetValidation()
+  }
+
   return (
-    <div className="validation">
-      <h1>{validation}</h1>
-      <button onClick={resetValidation}>Close</button>
-    </div>
+    <Snackbar open={validation !== ''} autoHideDuration={6000} onClose={handleClose}>
+      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+        {validation}
+      </Alert>
+    </Snackbar>
   )
 }
 

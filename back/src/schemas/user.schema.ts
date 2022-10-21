@@ -10,15 +10,6 @@ export type Notification = {
   date: Date;
 };
 
-export enum TypeOfPain {
-  'Head',
-  'Neck',
-  'Shoulder',
-  'Back',
-  'Elbow',
-  'Wrist',
-}
-
 type Data = {
   number: number;
   date: Date;
@@ -30,7 +21,7 @@ export type FeelingData = {
   stress: number;
   happiness: number;
   anxiety: number;
-  pain: TypeOfPain[];
+  note: string;
 };
 
 export type Health = {

@@ -7,21 +7,21 @@ const appSlice = createSlice({
     error: ''
   },
   reducers: {
-    setValidation: (state, action) => {
+    SET_VALIDATION: (state, action) => {
       state.validation = action.payload
     },
-    setError: (state, action) => {
+    SET_ERROR: (state, action) => {
       state.error = action.payload
     },
-    clearError: (state) => {
+    CLEAR_ERROR: (state) => {
       state.error = ''
     },
-    clearValidation: (state) => {
+    CLEAR_VALIDATION: (state) => {
       state.validation = ''
     }
   }
 })
 
-export const { setValidation, setError, clearError, clearValidation } = appSlice.actions
+export const { SET_VALIDATION, SET_ERROR, CLEAR_ERROR, CLEAR_VALIDATION } = appSlice.actions
 
 export default appSlice.reducer
