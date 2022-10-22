@@ -39,7 +39,7 @@ const Layout = (props) => {
     <HistoryRouter history={history}>
       <Validation validation={validation} resetValidation={resetValidation} />
       <Error error={error} resetError={resetError} />
-      <Header isConnected={user !== null} />
+      <Header isConnected={user !== null} user={user} />
       <Routes>
         <Route path={routes.home} element={<Home />} />
         <Route path={routes.login} element={<Login />} />

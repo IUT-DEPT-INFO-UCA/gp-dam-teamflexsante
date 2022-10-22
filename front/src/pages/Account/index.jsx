@@ -3,7 +3,7 @@ import React from 'react'
 import FeelingForm from '../../components/FeelingForm'
 import HealthInfo from '../../components/HealthInfo'
 import PersonalInfo from '../../components/PersonalInfo'
-import Personal_Circle from '../../components/Personal_Circle/index'
+import PersonalCircle from '../../components/PersonalCircle'
 
 import './styles.css'
 
@@ -41,8 +41,8 @@ const Account = () => {
       <Box className="AccountSelector" sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Information Personnel" {...a11yProps(0)} />
-          <Tab label="Diagrame" {...a11yProps(1)} />
-          <Tab label="Vos Sentiment" {...a11yProps(2)} />
+          <Tab label="Mes données de santé" {...a11yProps(1)} />
+          <Tab label="Mon ressenti" {...a11yProps(2)} />
           <Tab label="Cercle Personnel" {...a11yProps(3)} />
         </Tabs>
       </Box>
@@ -56,7 +56,7 @@ const Account = () => {
         <FeelingForm />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Personal_Circle />
+        <PersonalCircle />
       </TabPanel>
     </div>
   )
