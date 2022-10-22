@@ -6,6 +6,11 @@ import { Request } from 'express';
 export class GroupController {
   constructor(private groupService: GroupService) {}
 
+  /**
+   * If user is patient then retrieve all members, if user is doctor or nurse then retrieve all patients, if user is family then retrieve the patient
+   * @param {Request} request
+   * @returns {Promise<{message: string; result: [User]}>} List of users
+   */
   @Get()
   async getGroup(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -16,6 +21,11 @@ export class GroupController {
     };
   }
 
+  /**
+   * Send a notification to a user to join the group of the patient user
+   * @param {Request} request
+   * @returns {Promise<{message: string; result: User}>} The notified user
+   */
   @Post('request/add')
   async requestAddUserToMyGroup(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -30,6 +40,11 @@ export class GroupController {
     };
   }
 
+  /**
+   * Send a notification to the patient to ask to join his group
+   * @param {Request} request
+   * @returns {Promise<{message: string; result: User}>} The notified user
+   */
   @Post('request/join')
   async requestJoinGroupOfUser(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -44,6 +59,11 @@ export class GroupController {
     };
   }
 
+  /**
+   * Accept to add a member to the connected patient user
+   * @param {Request} request
+   * @returns {Promise<{message: string; result: User}>} The notified user
+   */
   @Post('accept/add')
   async acceptAddUserToMyGroup(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -59,6 +79,11 @@ export class GroupController {
     };
   }
 
+  /**
+   * Accept the request to join the group of the patient user
+   * @param {Request} request
+   * @returns {Promise<{message: string; result: User}>} The notified user
+   */
   @Post('accept/join')
   async acceptJoinGroupOfUser(@Req() request: Request) {
     const { authorization } = request.headers;

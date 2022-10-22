@@ -2,10 +2,24 @@
 
 ## Installation
 
-- ```npm install```
-- ```npm run dev```
+- NodeJS (https://nodejs.org/en/)
 
-## Stack
+### Développement
+
+```bash
+- cp .env.example .env
+- npm install
+- npm run dev
+```
+
+### Production
+
+```bash
+- cp .env.example .env
+- npm run build
+- npm run preview
+```
+## Les technologies utilisées
 
 - [React](https://reactjs.org/)
 - [Vite](https://vitejs.dev/)

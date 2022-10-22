@@ -22,3 +22,7 @@ Le détail de l'organisation et de la répartition du travail est disponible dan
 ## Bilan du travail accompli, problèmes rencontrés et points forts / faibles
 
 Le détail est disponible dans le fichier ```docs/BILAN.md```.
+
+## Documentation technique du backend
+
+Il est possible de générer la documentation technique du backend en exécutant la commande ```npm run doc``` dans le dossier ```back```.

@@ -11,6 +11,11 @@ export class GroupService {
     private userModel: Model<UserDocument>,
   ) {}
 
+  /**
+   * Get group of a user (see associated controller)
+   * @param {string} token the token of the user
+   * @returns a list of users
+   */
   async getGroup(token: string) {
     const user = await this.userModel.findOne({ token });
 
@@ -28,6 +33,12 @@ export class GroupService {
     }
   }
 
+  /**
+   * Send a notification to a user (see associated controller)
+   * @param {string} token the token of the user
+   * @param {string} email the email of the user to notify
+   * @returns the user notified
+   */
   async requestAddUserToMyGroup(token: string, email: string) {
     const user = await this.userModel.findOne({ token });
 
@@ -65,6 +76,12 @@ export class GroupService {
     return userToNotify.save();
   }
 
+  /**
+   * Send a notification to a user (see associated controller)
+   * @param {string} token the token of the user
+   * @param {string} email the email of the user to notify
+   * @returns the user notified
+   */
   async requestJoinGroupOfUser(token: string, email: string) {
     const user = await this.userModel.findOne({ token });
 
@@ -102,6 +119,13 @@ export class GroupService {
     return userToNotify.save();
   }
 
+  /**
+   * Accept a request to add a user to a group (see associated controller)
+   * @param {string} token the token of the user
+   * @param {string} email the email of the user to add
+   * @param {string} notificationId the id of the notification
+   * @returns the user added
+   */
   async acceptAddUserToMyGroup(
     token: string,
     email: string,
@@ -145,6 +169,13 @@ export class GroupService {
     return user.save();
   }
 
+  /**
+   * Accept a request to join a group (see associated controller)
+   * @param {string} token the token of the user
+   * @param {string} email the email of the user to add
+   * @param {string} notificationId the id of the notification
+   * @returns the user added
+   */
   async acceptJoinGroupOfUser(
     token: string,
     email: string,
