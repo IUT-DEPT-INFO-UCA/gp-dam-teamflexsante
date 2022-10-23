@@ -1,13 +1,17 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
-import { Box, Card, Divider, Typography } from '@mui/material'
-
-import './styles.css'
+import { Box, Button, Card, Divider, Typography } from '@mui/material'
+import { USER_LOGOUT } from '../../redux/store/user/actions'
 
 const PersonalInfo = () => {
   const { t } = useTranslation()
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
+
+  const handleDisconnect = () => {
+    dispatch({ type: USER_LOGOUT })
+  }
 
   const renderInfo = (label, value) => (
     <>
@@ -54,6 +58,15 @@ const PersonalInfo = () => {
         {renderInfo(t('personalInfo.email'), user.email)}
         {renderInfo(t('personalInfo.phone'), user.phone)}
         {renderInfo(t('personalInfo.address'), user.address)}
+        <Button
+          onClick={handleDisconnect}
+          variant="contained"
+          color="error"
+          sx={{
+            marginTop: 2
+          }}>
+          {t('disconnect')}
+        </Button>
       </Card>
     </Box>
   )

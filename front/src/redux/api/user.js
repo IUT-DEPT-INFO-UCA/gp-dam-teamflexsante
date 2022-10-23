@@ -30,6 +30,15 @@ export const getUserByToken = async (token) => {
   }).then((response) => response.json())
 }
 
+export const getUserById = async (id) => {
+  return fetch(API_URL + '/user/' + id, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then((response) => response.json())
+}
+
 export const postFeelingForm = async (payload, token) => {
   return fetch(API_URL + '/user/feeling', {
     method: 'POST',
@@ -40,5 +49,36 @@ export const postFeelingForm = async (payload, token) => {
     body: JSON.stringify({
       feeling: payload
     })
+  }).then((response) => response.json())
+}
+
+export const sendRequest = async (payload, token) => {
+  return fetch(API_URL + '/group/request', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    body: JSON.stringify(payload)
+  }).then((response) => response.json())
+}
+
+export const acceptRequest = async (payload, token) => {
+  return fetch(API_URL + '/group/accept', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: token
+    },
+    body: JSON.stringify(payload)
+  }).then((response) => response.json())
+}
+
+export const generateFakeData = async () => {
+  return fetch(API_URL + '/user/generate', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
   }).then((response) => response.json())
 }
