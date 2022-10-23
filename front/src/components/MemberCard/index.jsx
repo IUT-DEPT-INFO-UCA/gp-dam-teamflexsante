@@ -5,14 +5,17 @@ import EmailIcon from '@mui/icons-material/Email'
 import PropTypes from 'prop-types'
 
 const MemberCard = (props) => {
-  const { name, role, email, phone } = props
+  const { name, role, email, phone, onMemberClick, isSelected } = props
 
   return (
     <Card
+      onClick={onMemberClick}
       sx={{
         display: 'flex',
         flexDirection: 'column',
-        padding: 3
+        padding: 3,
+        cursor: 'pointer',
+        backgroundColor: isSelected ? 'primary.main' : 'background.default'
       }}>
       <Typography
         component="p"
@@ -65,7 +68,9 @@ MemberCard.propTypes = {
   name: PropTypes.string.isRequired,
   role: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  phone: PropTypes.string.isRequired
+  phone: PropTypes.string.isRequired,
+  onMemberClick: PropTypes.func,
+  isSelected: PropTypes.bool
 }
 
 export default MemberCard

@@ -4,6 +4,7 @@ import PermIdentityIcon from '@mui/icons-material/PermIdentity'
 import BarChartIcon from '@mui/icons-material/BarChart'
 import RateReviewIcon from '@mui/icons-material/RateReview'
 import Diversity3Icon from '@mui/icons-material/Diversity3'
+import { useSelector } from 'react-redux'
 
 import FeelingForm from '../../components/FeelingForm'
 import HealthInfo from '../../components/HealthInfo'
@@ -40,6 +41,7 @@ const Account = () => {
   const [value, setValue] = useState(0)
   const [bottomNavValue, setBottomNavValue] = useState(0)
   const isMobile = useMobile()
+  const { user } = useSelector((state) => state.user)
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
@@ -50,6 +52,7 @@ const Account = () => {
       {bottomNavValue === 0 && <PersonalInfo />}
       {bottomNavValue === 1 && <HealthInfo />}
       {bottomNavValue === 2 && <FeelingForm />}
+      {bottomNavValue === 3 && <PersonalCircle />}
       <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
@@ -59,7 +62,9 @@ const Account = () => {
           }}>
           <BottomNavigationAction label="Infos" icon={<PermIdentityIcon />} />
           <BottomNavigationAction label="Données" icon={<BarChartIcon />} />
-          <BottomNavigationAction label="Ressenti" icon={<RateReviewIcon />} />
+          {user?.role === 'patient' ? (
+            <BottomNavigationAction label="Ressenti" icon={<RateReviewIcon />} />
+          ) : null}
           <BottomNavigationAction label="Cercle" icon={<Diversity3Icon />} />
         </BottomNavigation>
       </Paper>
@@ -69,8 +74,8 @@ const Account = () => {
       <Box className="AccountSelector" sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Information Personnel" {...a11yProps(0)} />
-          <Tab label="Mes données de santé" {...a11yProps(1)} />
-          <Tab label="Mon ressenti" {...a11yProps(2)} />
+          <Tab label="Données de santé" {...a11yProps(1)} />
+          {user.role === 'patient' ? <Tab label="Mon ressenti" {...a11yProps(2)} /> : null}
           <Tab label="Cercle Personnel" {...a11yProps(3)} />
         </Tabs>
       </Box>
@@ -80,10 +85,12 @@ const Account = () => {
       <TabPanel value={value} index={1}>
         <HealthInfo />
       </TabPanel>
-      <TabPanel value={value} index={2}>
-        <FeelingForm />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
+      {user.role === 'patient' ? (
+        <TabPanel value={value} index={2}>
+          <FeelingForm />
+        </TabPanel>
+      ) : null}
+      <TabPanel value={value} index={user.role === 'patient' ? 3 : 2}>
         <PersonalCircle />
       </TabPanel>
     </div>

@@ -4,6 +4,9 @@
     "app.name": "FlexSanté",
     "header.login": "Login",
     "header.account": "My account",
+    "header.notification.addRequest": "{{name}} wants to add you in his personal circle",
+    "header.notification.joinRequest": "{{name}} wants to join your personal circle",
+    "disconnect": "Disconnect",
     "login.title": "Login",
     "login.email": "Email",
     "login.password": "Password",
@@ -45,6 +48,7 @@
     "personalCircle.add.submit": "Add",
     "personalCircle.add.cancel": "Cancel",
     "healthInfo.title": "Health Informations",
+    "healthInfo.patients": "Your aged people",
     "healthInfo.heartRate": "Heart rate",
     "healthInfo.heartRate.unit": "bpm",
     "healthInfo.bloodOxygen": "Blood oxygen",
@@ -57,6 +61,8 @@
     "healthInfo.stress.unit": "%",
     "healthInfo.temperature": "Temperature",
     "healthInfo.temperature.unit": "°C",
+    "healthInfo.generate": "Generate data",
+    "healthInfo.feeling": "Feeling",
     "personalInfo.title": "Personal information",
     "personalInfo.lastname": "Lastname",
     "personalInfo.firstname": "Firstname",
@@ -64,6 +70,10 @@
     "personalInfo.phone": "Phone",
     "personalInfo.address": "Address",
     "personalInfo.sex": "Gender",
-    "personalInfo.age": "Age" 
+    "personalInfo.age": "Age",
+    "feelingsChart.tiredness": "Tiredness",
+    "feelingsChart.stress": "Stress",
+    "feelingsChart.happiness": "Happiness",
+    "feelingsChart.anxiety": "Anxiety"
   }
 }

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Box, ToggleButton, ToggleButtonGroup, Typography } from '@mui/material'
 
 const SimpleLineChart = (props) => {
-  const { data, title, unit } = props
+  const { data, title, unit, role } = props
 
   const reversedData = useMemo(() => {
     const reversed = [...data]
@@ -80,9 +80,15 @@ const SimpleLineChart = (props) => {
       <ToggleButtonGroup value={period} exclusive onChange={handlePeriod}>
         <ToggleButton value="1w">7j</ToggleButton>
         <ToggleButton value="1m">1m</ToggleButton>
-        <ToggleButton value="3m">3m</ToggleButton>
-        <ToggleButton value="6m">6m</ToggleButton>
-        <ToggleButton value="1y">1a</ToggleButton>
+        <ToggleButton value="3m" disabled={role === 'nurse'}>
+          3m
+        </ToggleButton>
+        <ToggleButton value="6m" disabled={role === 'nurse'}>
+          6m
+        </ToggleButton>
+        <ToggleButton value="1y" disabled={role === 'nurse'}>
+          1a
+        </ToggleButton>
       </ToggleButtonGroup>
     </Box>
   )
@@ -91,7 +97,8 @@ const SimpleLineChart = (props) => {
 SimpleLineChart.propTypes = {
   data: PropTypes.array.isRequired,
   title: PropTypes.string.isRequired,
-  unit: PropTypes.string.isRequired
+  unit: PropTypes.string.isRequired,
+  role: PropTypes.string.isRequired
 }
 
 export default SimpleLineChart
