@@ -1,10 +1,15 @@
 import { put, takeEvery } from 'redux-saga/effects'
 
-import { login as apiLogin, getUserByToken, postFeelingForm } from '../../api/user'
+import {
+  login as apiLogin,
+  register as apiRegister,
+  getUserByToken,
+  postFeelingForm
+} from '../../api/user'
 import history from '../../../router/history'
 
 import { SET_USER } from './slice'
-import { RELOAD_USER, SUBMIT_FEELING_FORM, USER_LOGIN } from './actions'
+import { RELOAD_USER, SUBMIT_FEELING_FORM, USER_LOGIN, USER_REGISTER } from './actions'
 import { routes } from '../../../router/routes'
 import { getToken, setToken } from '../../../utils/token'
 import { SET_ERROR, SET_VALIDATION } from '../app/slice'
@@ -17,6 +22,17 @@ function* login(payload) {
 
   if (res.statusCode === 201) {
     yield put({ type: SET_VALIDATION, payload: 'Connexion réussi !' })
+    yield put({ type: SET_USER, payload: res.data })
+    setToken(res.data.token)
+    history.push(routes.account)
+  }
+}
+
+function* register(payload) {
+  console.log('register', payload)
+  const res = yield apiRegister(payload.data)
+
+  if (res.statusCode === 201) {
     yield put({ type: SET_USER, payload: res.data })
     setToken(res.data.token)
     history.push(routes.account)
@@ -51,6 +67,7 @@ function* submitFeelingForm(payload) {
 
 export default function* userSagas() {
   yield takeEvery(USER_LOGIN, login)
+  yield takeEvery(USER_REGISTER, register)
   yield takeEvery(RELOAD_USER, authByToken)
   yield takeEvery(SUBMIT_FEELING_FORM, submitFeelingForm)
 }
