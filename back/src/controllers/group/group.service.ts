@@ -39,184 +39,76 @@ export class GroupService {
    * @param {string} email the email of the user to notify
    * @returns the user notified
    */
-  async requestAddUserToMyGroup(token: string, email: string) {
+  async requestGroup(token: string, email: string) {
     const user = await this.userModel.findOne({ token });
-
-    if (!user) {
-      throw new HttpException('User not found', 400);
-    }
-
-    if (user.role !== Role.PATIENT) {
-      throw new HttpException(
-        'User is not a patient so cannot request user to join his group',
-        400,
-      );
-    }
-
     const userToNotify = await this.userModel.findOne({ email });
 
-    if (!userToNotify) {
-      throw new HttpException('User to add not found', 400);
-    }
-
-    if (userToNotify.role === Role.PATIENT) {
-      throw new HttpException(
-        'User is a patient so cannot be added to a group',
-        400,
-      );
-    }
-
-    userToNotify.notifications.push({
-      id: generateRandomToken(),
-      type: 'addRequest',
-      from: user,
-      date: new Date(),
-    });
-
-    return userToNotify.save();
-  }
-
-  /**
-   * Send a notification to a user (see associated controller)
-   * @param {string} token the token of the user
-   * @param {string} email the email of the user to notify
-   * @returns the user notified
-   */
-  async requestJoinGroupOfUser(token: string, email: string) {
-    const user = await this.userModel.findOne({ token });
-
     if (!user) {
-      throw new HttpException('User not found', 400);
+      throw new HttpException('Connected user not found', 400);
+    }
+
+    if (!userToNotify) {
+      throw new HttpException('No user associated to this email', 400);
     }
 
     if (user.role === Role.PATIENT) {
-      throw new HttpException(
-        'User is a patient so cannot request to join a group',
-        400,
-      );
+      userToNotify.notifications.push({
+        id: generateRandomToken(),
+        type: 'addRequest',
+        from: user,
+        date: new Date(),
+      });
+
+      return userToNotify.save();
+    } else {
+      userToNotify.notifications.push({
+        id: generateRandomToken(),
+        type: 'joinRequest',
+        from: user,
+        date: new Date(),
+      });
+
+      return userToNotify.save();
     }
-
-    const userToNotify = await this.userModel.findOne({ email });
-
-    if (!userToNotify) {
-      throw new HttpException('User to join not found', 400);
-    }
-
-    if (userToNotify.role !== Role.PATIENT) {
-      throw new HttpException(
-        'User is not a patient so cannot handle a group',
-        400,
-      );
-    }
-
-    userToNotify.notifications.push({
-      id: generateRandomToken(),
-      type: 'joinRequest',
-      from: user,
-      date: new Date(),
-    });
-
-    return userToNotify.save();
   }
 
   /**
-   * Accept a request to add a user to a group (see associated controller)
+   * Accept a request to join or add a user to a group (see associated controller)
    * @param {string} token the token of the user
    * @param {string} email the email of the user to add
    * @param {string} notificationId the id of the notification
    * @returns the user added
    */
-  async acceptAddUserToMyGroup(
-    token: string,
-    email: string,
-    notificationId: string,
-  ) {
+  async acceptGroup(token: string, email: string, notificationId: string) {
     const user = await this.userModel.findOne({ token });
+    const user2 = await this.userModel.findOne({ email });
 
     if (!user) {
-      throw new HttpException('User not found', 400);
+      throw new HttpException('Connected user not found', 400);
     }
 
-    if (user.role !== Role.PATIENT) {
-      throw new HttpException(
-        'User is not a patient so cannot accept add request',
-        400,
-      );
-    }
-
-    if (user.notifications.find((n) => n.id === notificationId) === undefined) {
-      throw new HttpException('Notification not found', 400);
-    }
-
-    const userToAdd = await this.userModel.findOne({ email });
-
-    if (!userToAdd) {
-      throw new HttpException('User to add not found', 400);
-    }
-
-    if (userToAdd.role === Role.PATIENT) {
-      throw new HttpException(
-        'User is a patient so cannot be added to a group',
-        400,
-      );
-    }
-
-    user.group.push(userToAdd);
-    user.notifications = user.notifications.filter(
-      (n) => n.id !== notificationId,
-    );
-
-    return user.save();
-  }
-
-  /**
-   * Accept a request to join a group (see associated controller)
-   * @param {string} token the token of the user
-   * @param {string} email the email of the user to add
-   * @param {string} notificationId the id of the notification
-   * @returns the user added
-   */
-  async acceptJoinGroupOfUser(
-    token: string,
-    email: string,
-    notificationId: string,
-  ) {
-    const user = await this.userModel.findOne({ token });
-
-    if (!user) {
-      throw new HttpException('User not found', 400);
+    if (!user2) {
+      throw new HttpException('No user associated to this email', 400);
     }
 
     if (user.role === Role.PATIENT) {
-      throw new HttpException(
-        'User is a patient so cannot accept join request',
-        400,
+      user.group.push(user2);
+      user2.group.push(user);
+      user.notifications = user.notifications.filter(
+        (n) => n.id !== notificationId,
       );
-    }
 
-    if (user.notifications.find((n) => n.id === notificationId) === undefined) {
-      throw new HttpException('Notification not found', 400);
-    }
-
-    const userToJoin = await this.userModel.findOne({ email });
-
-    if (!userToJoin) {
-      throw new HttpException('User to join not found', 400);
-    }
-
-    if (userToJoin.role !== Role.PATIENT) {
-      throw new HttpException(
-        'User is not a patient so cannot join a group',
-        400,
+      await user2.save();
+      return user.save();
+    } else {
+      user.group.push(user2);
+      user2.group.push(user);
+      user.notifications = user.notifications.filter(
+        (n) => n.id !== notificationId,
       );
+
+      await user.save();
+      return user2.save();
     }
-
-    userToJoin.group.push(user);
-    user.notifications = user.notifications.filter(
-      (n) => n.id !== notificationId,
-    );
-
-    await user.save();
-    return userToJoin.save();
   }
 }

@@ -28,7 +28,7 @@ On retrouve donc 4 types de membres :
 ### Famille
 
 - En tant que membre de la famille, je veux pouvoir demander à rejoindre le cercle personnel d'une personne agée en la recherchant via son nom afin de consulter ses informations personnelles. 
-- En tant que membre de la famille, je veux pouvoir consulter certaines données de santé (BPM, Tension, Sentiment personnel, Sommeil) de la personne agée via des graphiques et des chiffres afin de prendre connaissance de son état de santé global. 
+- En tant que membre de la famille, je veux pouvoir consulter certaines données de santé (BPM, Tension, Sentiment personnel, Sommeil, Température) de la personne agée via des graphiques et des chiffres afin de prendre connaissance de son état de santé global. 
 
 ### Médecin généraliste
 
