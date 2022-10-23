@@ -6,6 +6,11 @@ import { UserService } from './user.service';
 export class UserController {
   constructor(private userService: UserService) {}
 
+  /**
+   * Register a new user
+   * @param {Request} request
+   * @returns the registered user
+   */
   @Post('register')
   async register(@Req() request: Request) {
     const {
@@ -36,6 +41,11 @@ export class UserController {
     };
   }
 
+  /**
+   * Connect a user
+   * @param {Request} request
+   * @returns the connected user
+   */
   @Post('login')
   async login(@Req() request: Request) {
     const { email, password } = request.body;
@@ -49,6 +59,11 @@ export class UserController {
     };
   }
 
+  /**
+   * Get the user associated with the token
+   * @param {Request} request
+   * @returns the user
+   */
   @Get()
   async getUserByToken(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -59,6 +74,11 @@ export class UserController {
     };
   }
 
+  /**
+   * Post a new feeling form
+   * @param {Request} request
+   * @returns the modified user
+   */
   @Post('feeling')
   async addFeeling(@Req() request: Request) {
     const { authorization } = request.headers;
@@ -73,6 +93,10 @@ export class UserController {
     };
   }
 
+  /**
+   * Generate 1 year of fake data for all the patient
+   * @returns a boolean
+   */
   @Get('generate')
   async generate() {
     return {

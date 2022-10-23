@@ -18,6 +18,11 @@ const saltOrRounds = 10;
 export class UserService {
   constructor(@InjectModel(User.name) private userModel: Model<UserDocument>) {}
 
+  /**
+   * Add a new user to the database
+   * @param {UserInterface} user see User interface for more details
+   * @returns the created user
+   */
   async create(user: UserInterface): Promise<UserDocument> {
     const {
       firstname,
@@ -64,6 +69,11 @@ export class UserService {
     return newUser.save();
   }
 
+  /**
+   * Connect a user to the application
+   * @param {UserLoginInterface} user email + password
+   * @returns the connected user
+   */
   async login(user: UserLoginInterface): Promise<UserDocument> {
     const { email, password } = user;
     const userFound = await this.userModel.findOne({ email });
@@ -82,6 +92,11 @@ export class UserService {
     return userFound.save();
   }
 
+  /**
+   * Connect a user to the application with a token
+   * @param {string} token the user token
+   * @returns the connected user
+   */
   async getUserByToken(token: string): Promise<UserDocument> {
     const userFound = await this.userModel.findOne({ token });
     if (!userFound) {
@@ -91,6 +106,12 @@ export class UserService {
     return userFound;
   }
 
+  /**
+   * Post a feeling form for a patient
+   * @param {string} token the user token
+   * @param {FeelingData} feeling the feeling data, see FeelingData in the user.schema.ts file
+   * @returns the updated user
+   */
   async addFeeling(token: string, feeling: FeelingData): Promise<UserDocument> {
     const userFound = await this.userModel.findOne({ token });
     if (!userFound) {
@@ -116,6 +137,10 @@ export class UserService {
     return userFound.save();
   }
 
+  /**
+   * Generate 1 year of random feeling data for all patient
+   * @returns a boolean
+   */
   async generate(): Promise<boolean> {
     try {
       const patients = await this.userModel.find({ role: Role.PATIENT });
@@ -144,11 +169,11 @@ export class UserService {
           });
           temperature.push({
             date: new Date(new Date().setDate(new Date().getDate() - i)),
-            value: Math.floor(Math.random() * 350) + 365,
+            value: Math.floor(Math.random() * 7) + 35,
           });
           sleep.push({
             date: new Date(new Date().setDate(new Date().getDate() - i)),
-            value: Math.floor(Math.random() * 10) + 1,
+            value: Math.floor(Math.random() * 8) + 4,
           });
           stress.push({
             date: new Date(new Date().setDate(new Date().getDate() - i)),
@@ -165,6 +190,7 @@ export class UserService {
 
         // for some reason I need to have a callback here to assure that all data is saved
         // otherwise it will only save the first patient
+        patient.markModified('health');
         patient.save((err) => {
           if (err) {
             console.log(err);
