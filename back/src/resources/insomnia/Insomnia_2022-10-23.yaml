@@ -1,6 +1,6 @@
 _type: export
 __export_format: 4
-__export_date: 2022-10-09T10:28:48.740Z
+__export_date: 2022-10-23T15:20:15.265Z
 __export_source: insomnia.desktop.app:v2022.6.0
 resources:
   - _id: req_36117927a8254178b6a4d5334cb54d62
@@ -46,79 +46,12 @@ resources:
     description: ""
     scope: collection
     _type: workspace
-  - _id: req_01a04f6403704a16b43ab9101f6febce
-    parentId: fld_46bc310463ab4a56ba3b05b34eb453fa
-    modified: 1665235137956
-    created: 1665234069668
-    url: "{{ _.url }}/group/request/join"
-    name: SendRequestToJoinUserGroup
-    description: ""
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"email": "patient@test.com"
-        }
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_b5ceb9558a88481aa15f8815b1e574c2
-      - id: pair_7dc5749a7f2d43ebb7f63910fdcf4215
-        name: Authorization
-        value: 7p1lt07624qw0v95xym6gr
-        description: ""
-    authentication: {}
-    metaSortKey: -1665234069668
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
-  - _id: req_8000bb4ef3e5488486cb3cf21b9caf2f
-    parentId: fld_46bc310463ab4a56ba3b05b34eb453fa
-    modified: 1665235172241
-    created: 1665234141400
-    url: "{{ _.url }}/group/accept/add"
-    name: AcceptAddUserToMyGroup
-    description: ""
-    method: POST
-    body:
-      mimeType: application/json
-      text: |-
-        {
-        	"email": "doctor@test.com",
-        	"notificationId": "ugoyvmx79ygz8sbq2rntr"
-        }
-    parameters: []
-    headers:
-      - name: Content-Type
-        value: application/json
-        id: pair_ca6e1e7e8bb646a58be85851f24fa5e7
-      - id: pair_5d1fd31df23f4ecfa4a6e03fcaa639a7
-        name: Authorization
-        value: tyx171jep3k7labrxr4fo
-        description: ""
-    authentication: {}
-    metaSortKey: -1665233698278
-    isPrivate: false
-    settingStoreCookies: true
-    settingSendCookies: true
-    settingDisableRenderRequestBody: false
-    settingEncodeUrl: true
-    settingRebuildPath: true
-    settingFollowRedirects: global
-    _type: request
   - _id: req_bb8abc59169848dfa2b9f32db4c6575e
     parentId: fld_46bc310463ab4a56ba3b05b34eb453fa
-    modified: 1665234967785
+    modified: 1666527739556
     created: 1665233326888
-    url: "{{ _.url }}/group/request/add"
-    name: SendRequestToAddUser
+    url: "{{ _.url }}/group/request"
+    name: SendRequest
     description: ""
     method: POST
     body:
@@ -148,10 +81,10 @@ resources:
     _type: request
   - _id: req_83fb72b287824d7797be1d1e4e1fa02d
     parentId: fld_46bc310463ab4a56ba3b05b34eb453fa
-    modified: 1665235052013
+    modified: 1666529689241
     created: 1665234265330
-    url: "{{ _.url }}/group/accept/join"
-    name: AcceptJoinUserGroup
+    url: "{{ _.url }}/group/accept"
+    name: AcceptRequest
     description: ""
     method: POST
     body:
@@ -180,6 +113,37 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
+  - _id: req_16db0ea486834382af6c955256657be5
+    parentId: fld_901f7c7b5a124710977744e5b540915d
+    modified: 1666531273754
+    created: 1666531199353
+    url: "{{ _.url }}/user/635532e027860a99ca32070a"
+    name: GetUserById
+    description: ""
+    method: GET
+    body: {}
+    parameters: []
+    headers: []
+    authentication: {}
+    metaSortKey: -1666531199353
+    isPrivate: false
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: fld_901f7c7b5a124710977744e5b540915d
+    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
+    modified: 1665059642517
+    created: 1663659795870
+    name: User
+    description: ""
+    environment: {}
+    environmentPropertyOrder: null
+    metaSortKey: -1663659795870
+    _type: request_group
   - _id: req_213454342937426ea66f2c479a7912ef
     parentId: fld_901f7c7b5a124710977744e5b540915d
     modified: 1665309934877
@@ -201,16 +165,6 @@ resources:
     settingRebuildPath: true
     settingFollowRedirects: global
     _type: request
-  - _id: fld_901f7c7b5a124710977744e5b540915d
-    parentId: wrk_c8d8cd1201a24039a2d01dce653c4b87
-    modified: 1665059642517
-    created: 1663659795870
-    name: User
-    description: ""
-    environment: {}
-    environmentPropertyOrder: null
-    metaSortKey: -1663659795870
-    _type: request_group
   - _id: req_1337b65fdcc94eeca98ceebc74da11e6
     parentId: fld_901f7c7b5a124710977744e5b540915d
     modified: 1665309902787
@@ -278,7 +232,7 @@ resources:
     _type: request
   - _id: req_5f97f3743b4a49d8802b22e2ed2bf347
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665238905918
+    modified: 1666532406620
     created: 1665059654196
     url: "{{ _.url }}/user/login"
     name: Login
@@ -308,7 +262,7 @@ resources:
     _type: request
   - _id: req_385a93b2fa8e44ca9237453ff57fc95b
     parentId: fld_901f7c7b5a124710977744e5b540915d
-    modified: 1665238374495
+    modified: 1666532389187
     created: 1663659797397
     url: "{{ _.url }}/user/register"
     name: Register
@@ -318,15 +272,15 @@ resources:
       mimeType: application/json
       text: |-
         {
-        	"firstname": "Prénom",
-        	"lastname": "Nom",
-        	"email": "nurse@test.com",
+        	"firstname": "Tom",
+        	"lastname": "Grisou",
+        	"email": "family@test.com",
         	"password": "Azerty12",
         	"gender": "men",
         	"birthdate": "{% now 'millis', '' %}",
         	"phone": "0617743687",
         	"address": "4 Rue de la Liberté, Nice",
-        	"role": "patient"
+        	"role": "family"
         }
     parameters: []
     headers:
@@ -371,7 +325,7 @@ resources:
     _type: api_spec
   - _id: env_f50c84b232a549f1890dc2d8c2fdced5
     parentId: env_eefbb254a7d520188da296bb7bcc23066c1f3f46
-    modified: 1665068165485
+    modified: 1666446064278
     created: 1663659814238
     name: local
     data:
@@ -382,4 +336,18 @@ resources:
     color: null
     isPrivate: false
     metaSortKey: 1663659814238
+    _type: environment
+  - _id: env_a2e22a69fc19459bb001fe9d71cb291d
+    parentId: env_eefbb254a7d520188da296bb7bcc23066c1f3f46
+    modified: 1666446081219
+    created: 1666446056581
+    name: Prod
+    data:
+      url: http://217.160.51.173:3124
+    dataPropertyOrder:
+      "&":
+        - url
+    color: null
+    isPrivate: false
+    metaSortKey: 1666446056581
     _type: environment

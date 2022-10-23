@@ -22,18 +22,18 @@ export class GroupController {
   }
 
   /**
-   * Send a notification to a user to join the group of the patient user
+   * Send a notification related to group to a user
    * @param {Request} request
    * @returns {Promise<{message: string; result: User}>} The notified user
    */
-  @Post('request/add')
-  async requestAddUserToMyGroup(@Req() request: Request) {
+  @Post('request')
+  async requestGroup(@Req() request: Request) {
     const { authorization } = request.headers;
     const { email } = request.body;
 
     return {
       message: '2',
-      result: await this.groupService.requestAddUserToMyGroup(
+      result: await this.groupService.requestGroup(
         authorization as string,
         email,
       ),
@@ -41,57 +41,18 @@ export class GroupController {
   }
 
   /**
-   * Send a notification to the patient to ask to join his group
+   * Accept to join or add a user to a group
    * @param {Request} request
    * @returns {Promise<{message: string; result: User}>} The notified user
    */
-  @Post('request/join')
-  async requestJoinGroupOfUser(@Req() request: Request) {
-    const { authorization } = request.headers;
-    const { email } = request.body;
-
-    return {
-      message: '3',
-      result: await this.groupService.requestJoinGroupOfUser(
-        authorization as string,
-        email,
-      ),
-    };
-  }
-
-  /**
-   * Accept to add a member to the connected patient user
-   * @param {Request} request
-   * @returns {Promise<{message: string; result: User}>} The notified user
-   */
-  @Post('accept/add')
-  async acceptAddUserToMyGroup(@Req() request: Request) {
+  @Post('accept')
+  async acceptGroup(@Req() request: Request) {
     const { authorization } = request.headers;
     const { email, notificationId } = request.body;
 
     return {
       message: '4',
-      result: await this.groupService.acceptAddUserToMyGroup(
-        authorization as string,
-        email,
-        notificationId,
-      ),
-    };
-  }
-
-  /**
-   * Accept the request to join the group of the patient user
-   * @param {Request} request
-   * @returns {Promise<{message: string; result: User}>} The notified user
-   */
-  @Post('accept/join')
-  async acceptJoinGroupOfUser(@Req() request: Request) {
-    const { authorization } = request.headers;
-    const { email, notificationId } = request.body;
-
-    return {
-      message: '5',
-      result: await this.groupService.acceptJoinGroupOfUser(
+      result: await this.groupService.acceptGroup(
         authorization as string,
         email,
         notificationId,

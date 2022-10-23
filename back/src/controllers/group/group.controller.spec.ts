@@ -86,7 +86,7 @@ describe('GroupController', () => {
       },
     });
 
-    const res = await controller.requestAddUserToMyGroup(req);
+    const res = await controller.requestGroup(req);
     expect(res.result.notifications.length).toBeGreaterThan(0);
   });
 
@@ -102,7 +102,7 @@ describe('GroupController', () => {
       },
     });
 
-    const res = await controller.requestJoinGroupOfUser(req);
+    const res = await controller.requestGroup(req);
     expect(res.result.notifications.length).toBeGreaterThan(0);
   });
 
@@ -118,7 +118,7 @@ describe('GroupController', () => {
       },
     });
 
-    patient = (await controller.requestJoinGroupOfUser(req1)).result;
+    patient = (await controller.requestGroup(req1)).result;
 
     const req2 = httpMocks.createRequest({
       method: 'POST',
@@ -132,7 +132,7 @@ describe('GroupController', () => {
       },
     });
 
-    const res = await controller.acceptAddUserToMyGroup(req2);
+    const res = await controller.acceptGroup(req2);
     expect(res.result.group.length).toBeGreaterThan(0);
   });
 
@@ -148,7 +148,7 @@ describe('GroupController', () => {
       },
     });
 
-    doctor = (await controller.requestAddUserToMyGroup(req1)).result;
+    doctor = (await controller.requestGroup(req1)).result;
 
     const req = httpMocks.createRequest({
       method: 'POST',
@@ -162,7 +162,7 @@ describe('GroupController', () => {
       },
     });
 
-    const res = await controller.acceptJoinGroupOfUser(req);
+    const res = await controller.acceptGroup(req);
     expect(res.result.group.length).toBeGreaterThan(0);
   });
 
@@ -178,7 +178,7 @@ describe('GroupController', () => {
       },
     });
 
-    patient = (await controller.requestJoinGroupOfUser(req1)).result;
+    patient = (await controller.requestGroup(req1)).result;
 
     const req2 = httpMocks.createRequest({
       method: 'POST',
@@ -192,7 +192,7 @@ describe('GroupController', () => {
       },
     });
 
-    await controller.acceptAddUserToMyGroup(req2);
+    await controller.acceptGroup(req2);
 
     const req3 = httpMocks.createRequest({
       method: 'GET',

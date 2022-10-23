@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Get } from '@nestjs/common';
+import { Controller, Post, Req, Get, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { UserService } from './user.service';
 
@@ -102,6 +102,19 @@ export class UserController {
     return {
       message: '5',
       result: await this.userService.generate(),
+    };
+  }
+
+  /**
+   * Get the user associated with the id
+   * @param {string} id
+   * @returns the user
+   */
+  @Get(':id')
+  async getUSerById(@Param('id') id: string) {
+    return {
+      message: '6',
+      result: await this.userService.getUserById(id),
     };
   }
 }

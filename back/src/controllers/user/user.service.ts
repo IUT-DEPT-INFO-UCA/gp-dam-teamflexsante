@@ -107,6 +107,21 @@ export class UserService {
   }
 
   /**
+   * Return user data
+   * @param {string} id the user id
+   * @returns the user
+   */
+  async getUserById(id: string): Promise<UserDocument> {
+    const userFound = await this.userModel.findById(id);
+
+    if (!userFound) {
+      throw new HttpException('User not found', 400);
+    }
+
+    return userFound;
+  }
+
+  /**
    * Post a feeling form for a patient
    * @param {string} token the user token
    * @param {FeelingData} feeling the feeling data, see FeelingData in the user.schema.ts file

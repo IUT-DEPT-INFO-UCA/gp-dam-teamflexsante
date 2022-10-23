@@ -135,6 +135,38 @@ describe('UserController', () => {
     );
   });
 
+  it('should get a user by id', async () => {
+    const req1 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/user/register',
+      body: UserMock,
+    });
+
+    await controller.register(req1);
+
+    const req2 = httpMocks.createRequest({
+      method: 'POST',
+      url: '/user/login',
+      body: UserMock,
+    });
+
+    await controller.login(req2);
+
+    const userFromDb = await database
+      .model('User')
+      .findOne({ email: UserMock.email });
+
+    const req3 = httpMocks.createRequest({
+      method: 'GET',
+      url: '/user/' + userFromDb._id,
+      headers: {
+        authorization: userFromDb.token,
+      },
+    });
+
+    expect(await controller.getUserByToken(req3)).toHaveProperty('result._id');
+  });
+
   it('should post a new feeling', async () => {
     const req1 = httpMocks.createRequest({
       method: 'POST',
