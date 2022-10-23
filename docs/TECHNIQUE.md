@@ -28,7 +28,8 @@ Ces images sont ensuite utilisées pour créer des conteneurs Docker qui sont or
 
 ### Pipeline
 
-Lors d'un déploiement sur la branche master, la pipeline de déploiement est déclenché. Il s'agit d'une pipeline Github Actions qui permet de construire les images Docker et de les publier sur le DockerHub.
+Lors d'un déploiement sur la branche master, la pipeline de déploiement est déclenché. Il s'agit d'une pipeline Github Actions qui permet de construire les images Docker et de les publier sur le DockerHub. <br />
+En parallèle, un webhook déclenche une action sur le serveur de production qui construit ses images Docker et les lance dans des conteneurs Docker orchestrés par Docker Compose.
 
 
 ## Installation
