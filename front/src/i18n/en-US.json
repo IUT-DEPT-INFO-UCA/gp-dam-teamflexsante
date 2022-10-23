@@ -44,7 +44,6 @@
     "personalCircle.add.email": "Email",
     "personalCircle.add.submit": "Add",
     "personalCircle.add.cancel": "Cancel",
-    "forgotPassword.submit": "Reset my password",
     "healthInfo.title": "Health Informations",
     "healthInfo.heartRate": "Heart rate",
     "healthInfo.heartRate.unit": "bpm",

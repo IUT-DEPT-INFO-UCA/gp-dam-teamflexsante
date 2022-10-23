@@ -18,10 +18,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import { useDispatch } from 'react-redux'
 import { USER_REGISTER } from '../../redux/store/user/actions'
+import useRedirect from '../../utils/useRedirect'
 
 const Register = () => {
   const { t } = useTranslation()
   const dispatch = useDispatch()
+  useRedirect()
+
   const [birthdate, setBirthdate] = useState(dayjs())
   const [sexe, setSexe] = useState('')
   const [role, setRole] = useState('')

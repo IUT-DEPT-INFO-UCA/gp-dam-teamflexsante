@@ -5,10 +5,13 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { USER_LOGIN } from '../../redux/store/user/actions'
 
+import useRedirect from '../../utils/useRedirect'
+
 const Login = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  useRedirect()
 
   const handleSubmit = (event) => {
     event.preventDefault()

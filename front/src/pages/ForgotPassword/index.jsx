@@ -1,13 +1,15 @@
 import { Box, Button, Card, TextField, Typography } from '@mui/material'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import useRedirect from '../../utils/useRedirect'
 
 const ForgotPassword = () => {
   const { t } = useTranslation()
+  useRedirect()
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log(data)
+    // const data = new FormData(event.currentTarget)
   }
   return (
     <Box
