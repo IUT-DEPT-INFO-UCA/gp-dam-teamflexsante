@@ -1,9 +1,26 @@
-import { Box, Card, Divider, Typography } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
+import { Box, Card, Divider, Typography } from '@mui/material'
 
 import './styles.css'
 
 const PersonalInfo = () => {
+  const { t } = useTranslation()
+  const { user } = useSelector((state) => state.user)
+
+  const renderInfo = (label, value) => (
+    <>
+      <Typography component="p" variant="p">
+        {label}
+      </Typography>
+      <Typography component="h1" variant="h6">
+        {value}
+      </Typography>
+      <Divider className="divider" />
+    </>
+  )
+
   return (
     <Box
       sx={{
@@ -16,64 +33,27 @@ const PersonalInfo = () => {
       <Card
         sx={{
           width: '100%',
-          maxWidth: 500,
+          maxWidth: 600,
           padding: 3
         }}>
-        {/*   Le Nom    */}
-        <Typography component="h1" variant="h5">
-          Nom :
+        <Typography
+          component="h1"
+          variant="h4"
+          sx={{
+            marginBottom: 2
+          }}>
+          {t('personalInfo.title')}
         </Typography>
-        <Typography component="p" variant="p">
-          riri
-        </Typography>
-        <Divider className="divider" />
-        {/*   Le Prénom    */}
-        <Typography component="h1" variant="h5">
-          Prénom :
-        </Typography>
-        <Typography component="p" variant="p">
-          toto
-        </Typography>
-        <Divider className="divider" />
-        {/*   Le Sexe    */}
-        <Typography component="h1" variant="h5">
-          Sexe :
-        </Typography>
-        <Typography component="p" variant="p">
-          Male
-        </Typography>
-        <Divider className="divider" />
-        {/*   L'Age    */}
-        <Typography component="h1" variant="h5">
-          Age :
-        </Typography>
-        <Typography component="p" variant="p">
-          86 ans
-        </Typography>
-        <Divider className="divider" />
-        {/*   L'Email    */}
-        <Typography component="h1" variant="h5">
-          Email :
-        </Typography>
-        <Typography component="p" variant="p">
-          toto.riri@gmail.com
-        </Typography>
-        <Divider className="divider" />
-        {/*   Numéro de téléphone    */}
-        <Typography component="h1" variant="h5">
-          Numéro de téléphone :
-        </Typography>
-        <Typography component="p" variant="p">
-          06 75 83 96 64
-        </Typography>
-        <Divider className="divider" />
-        {/*   l'Adresse    */}
-        <Typography component="h1" variant="h5">
-          Adresse :
-        </Typography>
-        <Typography component="p" variant="p">
-          12 rue des Polites
-        </Typography>
+        {renderInfo(t('personalInfo.lastname'), user.lastname)}
+        {renderInfo(t('personalInfo.firstname'), user.firstname)}
+        {renderInfo(t('personalInfo.sex'), user.gender === 'men' ? 'Homme' : 'Femme')}
+        {renderInfo(
+          t('personalInfo.age'),
+          `${new Date().getFullYear() - new Date(user.birthdate).getFullYear()} ans`
+        )}
+        {renderInfo(t('personalInfo.email'), user.email)}
+        {renderInfo(t('personalInfo.phone'), user.phone)}
+        {renderInfo(t('personalInfo.address'), user.address)}
       </Card>
     </Box>
   )
