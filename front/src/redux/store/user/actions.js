@@ -1,3 +1,4 @@
 export const USER_LOGIN = 'USER_LOGIN'
+export const USER_REGISTER = 'USER_REGISTER'
 export const RELOAD_USER = 'RELOAD_USER'
 export const SUBMIT_FEELING_FORM = 'SUBMIT_FEELING_FORM'

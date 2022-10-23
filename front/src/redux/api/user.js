@@ -10,6 +10,16 @@ export const login = async (payload) => {
   }).then((response) => response.json())
 }
 
+export const register = async (payload) => {
+  return fetch(API_URL + '/user/register', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  }).then((response) => response.json())
+}
+
 export const getUserByToken = async (token) => {
   return fetch(API_URL + '/user', {
     method: 'GET',
