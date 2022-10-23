@@ -1,9 +1,15 @@
-import { Box, Tab, Tabs } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
+import { BottomNavigation, BottomNavigationAction, Box, Paper, Tab, Tabs } from '@mui/material'
+import PermIdentityIcon from '@mui/icons-material/PermIdentity'
+import BarChartIcon from '@mui/icons-material/BarChart'
+import RateReviewIcon from '@mui/icons-material/RateReview'
+import Diversity3Icon from '@mui/icons-material/Diversity3'
+
 import FeelingForm from '../../components/FeelingForm'
 import HealthInfo from '../../components/HealthInfo'
 import PersonalInfo from '../../components/PersonalInfo'
 import PersonalCircle from '../../components/PersonalCircle'
+import useMobile from '../../utils/useMobile'
 
 import './styles.css'
 
@@ -31,12 +37,34 @@ function a11yProps(index) {
 }
 
 const Account = () => {
-  const [value, setValue] = React.useState(0)
+  const [value, setValue] = useState(0)
+  const [bottomNavValue, setBottomNavValue] = useState(0)
+  const isMobile = useMobile()
 
   const handleChange = (event, newValue) => {
     setValue(newValue)
   }
-  return (
+
+  return isMobile ? (
+    <Box>
+      {bottomNavValue === 0 && <PersonalInfo />}
+      {bottomNavValue === 1 && <HealthInfo />}
+      {bottomNavValue === 2 && <FeelingForm />}
+      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+        <BottomNavigation
+          showLabels
+          value={bottomNavValue}
+          onChange={(event, newValue) => {
+            setBottomNavValue(newValue)
+          }}>
+          <BottomNavigationAction label="Infos" icon={<PermIdentityIcon />} />
+          <BottomNavigationAction label="Données" icon={<BarChartIcon />} />
+          <BottomNavigationAction label="Ressenti" icon={<RateReviewIcon />} />
+          <BottomNavigationAction label="Cercle" icon={<Diversity3Icon />} />
+        </BottomNavigation>
+      </Paper>
+    </Box>
+  ) : (
     <div>
       <Box className="AccountSelector" sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
