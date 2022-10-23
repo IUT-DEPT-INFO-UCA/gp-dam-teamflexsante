@@ -57,6 +57,14 @@
     "healthInfo.stress": "Niveau de stress",
     "healthInfo.stress.unit": "%",
     "healthInfo.temperature": "Température",
-    "healthInfo.temperature.unit": "°C"
+    "healthInfo.temperature.unit": "°C",
+    "personalInfo.title": "Mes informations personnelles",
+    "personalInfo.lastname": "Nom",
+    "personalInfo.firstname": "Prénom",
+    "personalInfo.email": "Mail",
+    "personalInfo.phone": "Téléphone",
+    "personalInfo.address": "Adresse",
+    "personalInfo.sex": "Genre",
+    "personalInfo.age": "Age" 
   }
 }
