@@ -9,6 +9,7 @@ Le développement du serveur est découpé en plusieurs parties :
 - La gestion des utilisateurs (authentification, création de compte, etc.)
 - La gestion du cercle personnel (ajout de membres, gestion des notifications, etc.)
 - La gestion des données de santés (formulaire de santé, génération de données, etc.)
+- Les tests unitaires
 
 Le développement du site web est découpé en plusieurs parties :
 - Les pages d'authentification (connexion, inscription)

@@ -1,96 +1,70 @@
 import { Box, Card, Typography } from '@mui/material'
 import React from 'react'
-import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts'
+import { Box, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-    pv: 2400,
-    amt: 2400
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-    pv: 1398,
-    amt: 2210
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-    pv: 9800,
-    amt: 2290
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-    pv: 3908,
-    amt: 2000
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-    pv: 4800,
-    amt: 2181
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-    pv: 3800,
-    amt: 2500
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-    pv: 4300,
-    amt: 2100
-  }
-]
+import SimpleLineChart from '../SimpleLineChart'
+import TwoLinesChart from '../TwoLinesChart'
 
 const HealthInfo = (props) => {
   const { t } = useTranslation()
   const { user } = props
-  console.log(user)
+
   return (
     <Box
       sx={{
         display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '80vh',
+        flexDirection: 'column',
+        height: '100%',
+        width: '100%',
         backgroundColor: 'background.default'
       }}>
-      <Card
+      <Typography component="h1" variant="h5">
+        {t('healthInfo.title')}
+      </Typography>
+      <Box
         sx={{
-          width: '100%',
-          maxWidth: 500,
-          padding: 3
+          display: 'flex',
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          justifyContent: 'space-around',
+          alignItems: 'center',
+          height: '100%',
+          width: '100%'
         }}>
-        <Typography component="h1" variant="h5">
-          {t('healthInfo.title')}
-        </Typography>
-        <LineChart
-          width={500}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 30,
-            left: 20,
-            bottom: 5
-          }}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="pv" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="uv" stroke="#82ca9d" />
-        </LineChart>
-      </Card>
+        <SimpleLineChart
+          data={user.health.heartRate}
+          title={t('healthInfo.heartRate')}
+          unit={t('healthInfo.heartRate.unit')}
+        />
+        <TwoLinesChart
+          data={user.health.bloodPressure}
+          title={t('healthInfo.bloodPressure')}
+          unit={t('healthInfo.bloodPressure.unit')}
+        />
+        <SimpleLineChart
+          data={user.health.bloodOxygen}
+          title={t('healthInfo.bloodOxygen')}
+          unit={t('healthInfo.bloodOxygen.unit')}
+        />
+        <SimpleLineChart
+          data={user.health.sleep}
+          title={t('healthInfo.sleep')}
+          unit={t('healthInfo.sleep.unit')}
+        />
+        <SimpleLineChart
+          data={user.health.stress}
+          title={t('healthInfo.stress')}
+          unit={t('healthInfo.stress.unit')}
+        />
+        <SimpleLineChart
+          data={user.health.temperature}
+          title={t('healthInfo.temperature')}
+          unit={t('healthInfo.temperature.unit')}
+        />
+      </Box>
     </Box>
   )
 }

@@ -33,6 +33,18 @@
     "forgotPassword.text": "Vous avez oublié votre mot de passe ? Pas de panique, même les plus grands acteurs ont des trous. Réinitialisons-le ensemble ! (évitez quand même le “12345”)",
     "forgotPassword.email": "Courriel",
     "forgotPassword.submit": "Réinitialiser mon mot de passe",
-    "healthInfo.title": "Informations sur la santé"
+    "healthInfo.title": "Informations sur la santé",
+    "healthInfo.heartRate": "Fréquence cardiaque",
+    "healthInfo.heartRate.unit": "bpm",
+    "healthInfo.bloodOxygen": "Taux d'oxygène dans le sang",
+    "healthInfo.bloodOxygen.unit": "%",
+    "healthInfo.bloodPressure": "Pression artérielle",
+    "healthInfo.bloodPressure.unit": "mmHg",
+    "healthInfo.sleep": "Sommeil",
+    "healthInfo.sleep.unit": "h",
+    "healthInfo.stress": "Niveau de stress",
+    "healthInfo.stress.unit": "%",
+    "healthInfo.temperature": "Température",
+    "healthInfo.temperature.unit": "°C"
   }
 }
