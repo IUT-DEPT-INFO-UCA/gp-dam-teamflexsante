@@ -29,7 +29,6 @@ function* authByToken() {
   if (token) {
     const res = yield getUserByToken(token)
     if (res.statusCode === 200) {
-      console.log(res.data)
       yield put({ type: SET_USER, payload: res.data })
       setToken(res.data.token)
     }

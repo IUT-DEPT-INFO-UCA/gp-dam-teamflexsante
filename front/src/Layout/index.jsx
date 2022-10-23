@@ -21,7 +21,7 @@ import Account from '../pages/Account'
 
 const Layout = (props) => {
   const { validation, error, resetError, resetValidation, user, reloadUser } = props
-
+  console.log('user', user)
   useEffect(() => {
     resetError()
     resetValidation()
