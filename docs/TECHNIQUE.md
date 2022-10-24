@@ -53,6 +53,8 @@ En parallèle, un webhook déclenche une action sur le serveur de production qui
 - Se placer dans le dossier du projet
 - Lancer ```docker compose build```
 - Lancer ```docker compose up```
+- Le front est accessible à l'adresse ```http://localhost:4000```
+- L'API est accessible à l'adresse ```http://localhost:3000```
 
 #### Manuellement
 
