@@ -26,3 +26,7 @@ Le détail est disponible dans le fichier ```docs/BILAN.md```.
 ## Documentation technique du backend
 
 Il est possible de générer la documentation technique du backend en exécutant la commande ```npm run doc``` dans le dossier ```back```.
+
+## Vidéo bonus
+
+Lien vers la vidéo bonus : https://unice-my.sharepoint.com/:v:/g/personal/pierre-adrien_vasseur_etu_unice_fr/EXT3SblTvQVDvgCS3ic3gdYBodV-hdOyRTRMiv7BUtGsqQ?e=kfbZA5
