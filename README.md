@@ -17,5 +17,5 @@ The detailed documentation is available in the ```README.md``` file of the ```do
   - It is possible to connect to the account of the project with the following credentials (with Google account)
     - Login: ```flexsantemedical@gmail.com```
     - Password: ```!m7-5c4r8cb3Ng58,DXGzEV{B(c2#vv5X)~QEq}E[G6|QKD(wa;}U!z7!d89:3T4$d949U2S79z-C3+,2wGh9H]:pj,Kbtiq:W7Y```
-
+- There is also an Architecture diagram in the ```docs/Architecture.pdf``` file representing the architecture of the software project.
 
