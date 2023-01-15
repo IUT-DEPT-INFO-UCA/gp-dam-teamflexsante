@@ -1,0 +1,89 @@
+import { Controller, Post, Req, Get, Param } from '@nestjs/common';
+import { Request } from 'express';
+import { UserService } from './user.service';
+
+@Controller('user')
+export class UserController {
+  constructor(private userService: UserService) {}
+
+  /**
+   * Register a new user
+   * @param {Request} request
+   * @returns the registered user
+   */
+  @Post('register')
+  async register(@Req() request: Request) {
+    const {
+      firstname,
+      lastname,
+      email,
+      password,
+      gender,
+      birthdate,
+      phone,
+      address,
+      role,
+    } = request.body;
+
+    return {
+      message: '1',
+      result: await this.userService.create({
+        firstname,
+        lastname,
+        email,
+        password,
+        gender,
+        birthdate,
+        phone,
+        address,
+        role,
+      }),
+    };
+  }
+
+  /**
+   * Connect a user
+   * @param {Request} request
+   * @returns the connected user
+   */
+  @Post('login')
+  async login(@Req() request: Request) {
+    const { email, password } = request.body;
+
+    return {
+      message: '2',
+      result: await this.userService.login({
+        email,
+        password,
+      }),
+    };
+  }
+
+  /**
+   * Get the user associated with the token
+   * @param {Request} request
+   * @returns the user
+   */
+  @Get()
+  async getUserByToken(@Req() request: Request) {
+    const { authorization } = request.headers;
+
+    return {
+      message: '3',
+      result: await this.userService.getUserByToken(authorization as string),
+    };
+  }
+
+  /**
+   * Get the user associated with the id
+   * @param {string} id
+   * @returns the user
+   */
+  @Get(':id')
+  async getUSerById(@Param('id') id: string) {
+    return {
+      message: '6',
+      result: await this.userService.getUserById(id),
+    };
+  }
+}
