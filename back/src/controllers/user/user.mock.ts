@@ -1,14 +1,13 @@
-import { Role } from '../../schemas/user.schema';
+import { Gender, Role } from '../../schemas/user.schema';
 import { UserInterface } from './user.interface';
 
 export const UserMock: UserInterface = {
-  _id: '5f9f1b9b9c9d440000a1b1b1',
   firstname: 'John',
   lastname: 'Doe',
   email: 'test@test.com',
-  password: 'test',
+  password: 'Azerty12',
   birthdate: new Date('1990-01-01'),
-  gender: 'men',
+  gender: Gender.MEN,
   address: '1 rue de la paix',
   phone: '0606060606',
   role: Role.PATIENT,

@@ -45,6 +45,12 @@ export enum Role {
   NURSE = 'nurse',
 }
 
+export enum Gender {
+  MEN = 'men',
+  WOMEN = 'women',
+  OTHER = 'other',
+}
+
 @Schema()
 export class User {
   @Prop({ type: mongoose.Schema.Types.ObjectId })
@@ -68,7 +74,7 @@ export class User {
   @Prop({ required: true })
   birthdate: Date;
 
-  @Prop({ required: true, enum: ['men', 'women', 'other'] })
+  @Prop({ required: true, enum: Gender })
   gender: string;
 
   @Prop({ required: true })

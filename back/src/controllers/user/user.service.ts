@@ -6,6 +6,7 @@ import * as bcrypt from 'bcrypt';
 import { UserInterface, UserLoginInterface } from './user.interface';
 import { User, UserDocument } from '../../schemas/user.schema';
 import { generateRandomToken } from '../../utils/token';
+import { checkPasswordStrength } from '../../utils/validation';
 
 const saltOrRounds = 10;
 
@@ -19,49 +20,28 @@ export class UserService {
    * @returns the created user
    */
   async create(user: UserInterface): Promise<UserDocument> {
-    const {
-      firstname,
-      lastname,
-      email,
-      password,
-      gender,
-      birthdate,
-      phone,
-      address,
-      role,
-    } = user;
+    const { email } = user;
     if (
-      !firstname ||
-      !lastname ||
+      !user.firstname ||
+      !user.lastname ||
       !email ||
-      !password ||
-      !gender ||
-      !birthdate ||
-      !phone ||
-      !address ||
-      !role
+      !user.password ||
+      !user.gender ||
+      !user.birthdate ||
+      !user.phone ||
+      !user.address ||
+      !user.role
     ) {
       throw new HttpException('Missing required fields', 400);
     }
-
     if (await this.userModel.findOne({ email })) {
       throw new HttpException('User already exists', 400);
     }
-
-    const hashedPassword = await bcrypt.hash(password, saltOrRounds);
-    const newUser = new this.userModel({
-      _id: new mongoose.Types.ObjectId(),
-      firstname,
-      lastname,
-      email,
-      password: hashedPassword,
-      gender,
-      birthdate,
-      phone,
-      address,
-      role,
-    });
-    return newUser.save();
+    await checkPasswordStrength(user.password);
+    const hashedPassword = await bcrypt.hash(user.password, saltOrRounds);
+    user.password = hashedPassword;
+    user._id = new mongoose.Types.ObjectId().toHexString();
+    return new this.userModel(user).save();
   }
 
   /**
@@ -77,14 +57,12 @@ export class UserService {
       throw new HttpException('User not found', 400);
     }
 
-    const isValid = await bcrypt.compare(password, userFound.password);
-    if (!isValid) {
+    if (!(await bcrypt.compare(password, userFound.password))) {
       throw new HttpException('Invalid password', 400);
     }
 
     userFound.token = generateRandomToken();
-
-    return userFound.save();
+    return await userFound.save();
   }
 
   /**
@@ -94,10 +72,7 @@ export class UserService {
    */
   async getUserByToken(token: string): Promise<UserDocument> {
     const userFound = await this.userModel.findOne({ token });
-    if (!userFound) {
-      throw new HttpException('User not found', 400);
-    }
-
+    if (!userFound) throw new HttpException('User not found', 400);
     return userFound;
   }
 
@@ -108,11 +83,7 @@ export class UserService {
    */
   async getUserById(id: string): Promise<UserDocument> {
     const userFound = await this.userModel.findById(id);
-
-    if (!userFound) {
-      throw new HttpException('User not found', 400);
-    }
-
+    if (!userFound) throw new HttpException('User not found', 400);
     return userFound;
   }
 }
