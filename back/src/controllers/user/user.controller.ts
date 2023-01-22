@@ -1,5 +1,5 @@
-import { Controller, Post, Req, Get, Param } from '@nestjs/common';
-import { Request } from 'express';
+import { Controller, Post, Get, Param, Body, Headers } from '@nestjs/common';
+import { UserInterface, UserLoginInterface } from './user.interface';
 import { UserService } from './user.service';
 
 @Controller('user')
@@ -12,32 +12,10 @@ export class UserController {
    * @returns the registered user
    */
   @Post('register')
-  async register(@Req() request: Request) {
-    const {
-      firstname,
-      lastname,
-      email,
-      password,
-      gender,
-      birthdate,
-      phone,
-      address,
-      role,
-    } = request.body;
-
+  async register(@Body() user: UserInterface) {
     return {
-      message: '1',
-      result: await this.userService.create({
-        firstname,
-        lastname,
-        email,
-        password,
-        gender,
-        birthdate,
-        phone,
-        address,
-        role,
-      }),
+      message: 'User created',
+      result: await this.userService.create(user),
     };
   }
 
@@ -47,15 +25,10 @@ export class UserController {
    * @returns the connected user
    */
   @Post('login')
-  async login(@Req() request: Request) {
-    const { email, password } = request.body;
-
+  async login(@Body() user: UserLoginInterface) {
     return {
-      message: '2',
-      result: await this.userService.login({
-        email,
-        password,
-      }),
+      message: 'User connected',
+      result: await this.userService.login(user),
     };
   }
 
@@ -65,12 +38,10 @@ export class UserController {
    * @returns the user
    */
   @Get()
-  async getUserByToken(@Req() request: Request) {
-    const { authorization } = request.headers;
-
+  async getUserByToken(@Headers('authorization') token: string) {
     return {
-      message: '3',
-      result: await this.userService.getUserByToken(authorization as string),
+      message: 'User found',
+      result: await this.userService.getUserByToken(token),
     };
   }
 
@@ -80,9 +51,9 @@ export class UserController {
    * @returns the user
    */
   @Get(':id')
-  async getUSerById(@Param('id') id: string) {
+  async getUserById(@Param('id') id: string) {
     return {
-      message: '6',
+      message: 'User found',
       result: await this.userService.getUserById(id),
     };
   }
