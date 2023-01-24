@@ -9,6 +9,9 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    default:
+      run: 
+        working-directory: ./back
 
     steps:
       - uses: actions/checkout@v2
@@ -16,8 +19,6 @@ jobs:
         uses: actions/setup-node@v2
         with: 
           node-version: "16.17.0"
-      - name: Go to backend directory
-        run: cd back
       - name: Install dependencies
         run: npm install
       - name: Run test
