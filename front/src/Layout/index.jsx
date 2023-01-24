@@ -12,6 +12,7 @@ import Error from '../components/Error'
 import Validation from '../components/Validation'
 import { routes } from '../router/routes'
 import Login from '../pages/Login'
+import Register from '../pages/Register'
 
 const Layout = () => {
 
@@ -32,6 +33,7 @@ const Layout = () => {
     <HistoryRouter history={history}>
       <Routes>
         <Route path={routes.login} element={<Login />} />
+        <Route path={routes.register} element={<Register />} />
       </Routes>
     </HistoryRouter>
   )
