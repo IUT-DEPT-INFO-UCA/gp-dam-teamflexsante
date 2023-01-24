@@ -1,5 +1,10 @@
 {
   "translation": {
-
+    "login.title": "Login",
+    "login.email": "Email",
+    "login.password": "Password",
+    "login.submit": "Login",
+    "login.forgotPassword": "Forgot your password?",
+    "login.noAccount": "No account? Sign up" 
   }
 }
