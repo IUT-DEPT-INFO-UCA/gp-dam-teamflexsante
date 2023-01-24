@@ -7,6 +7,11 @@
     "login.forgotPassword": "Forgot your password?",
     "login.noAccount": "No account? Sign up",
     "register.title": "Registration",
+    "register.state": "You are ?",
+    "register.state.patient": "Patient",
+    "register.state.family": "Family member",
+    "register.state.nurse": "Nurse",
+    "register.state.doctor": "Doctor",
     "register.name": "Name",
     "register.surname": "Surname",
     "register.submit": "Register",
@@ -20,6 +25,7 @@
     "register.postcode": "Postcode",
     "register.city": "City",
     "register.email": "Email",
-    "register.password": "Password"
+    "register.password": "Password",
+    "register.phone": "Phone"
   }
 }

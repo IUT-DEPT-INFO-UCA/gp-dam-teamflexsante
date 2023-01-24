@@ -7,6 +7,11 @@
     "login.forgotPassword": "Mot de passe oublié ?",
     "login.noAccount": "Pas de compte ? Inscrivez-vous !",
     "register.title": "Inscription",
+    "register.state": "Vous êtes ?",
+    "register.state.patient": "Patient",
+    "register.state.family": "Membre de la famille",
+    "register.state.nurse": "Infirmier(ère)",
+    "register.state.doctor": "Médecin",
     "register.name": "Prénom",
     "register.surname": "Nom",
     "register.submit": "S'inscrire",
@@ -20,6 +25,7 @@
     "register.postcode": "Code Postal",
     "register.city": "Ville",
     "register.email": "Courriel",
-    "register.password": "Mot de passe"
+    "register.password": "Mot de passe",
+    "register.phone": "Téléphone"
   }
 }
