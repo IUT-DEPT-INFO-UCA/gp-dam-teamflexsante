@@ -1,0 +1,31 @@
+{
+  "translation": {
+    "login.title": "Se connecter",
+    "login.email": "Email",
+    "login.password": "Mot de passe",
+    "login.submit": "Connexion",
+    "login.forgotPassword": "Mot de passe oublié ?",
+    "login.noAccount": "Pas de compte ? Inscrivez-vous !",
+    "register.title": "Inscription",
+    "register.state": "Vous êtes ?",
+    "register.state.patient": "Patient",
+    "register.state.family": "Membre de la famille",
+    "register.state.nurse": "Infirmier(ère)",
+    "register.state.doctor": "Médecin",
+    "register.name": "Prénom",
+    "register.surname": "Nom",
+    "register.submit": "S'inscrire",
+    "register.gender": "Sexe",
+    "register.gender.man": "Homme",
+    "register.gender.woman": "Femme",
+    "register.gender.other": "Autre",
+    "register.dob": "Date de naissance",
+    "register.adress": "Adresse",
+    "register.adress2": "Complément d'adresse",
+    "register.postcode": "Code Postal",
+    "register.city": "Ville",
+    "register.email": "Courriel",
+    "register.password": "Mot de passe",
+    "register.phone": "Téléphone"
+  }
+}

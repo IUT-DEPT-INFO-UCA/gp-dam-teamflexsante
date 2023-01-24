@@ -1,0 +1,31 @@
+{
+  "translation": {
+    "login.title": "Login",
+    "login.email": "Email",
+    "login.password": "Password",
+    "login.submit": "Login",
+    "login.forgotPassword": "Forgot your password?",
+    "login.noAccount": "No account? Sign up",
+    "register.title": "Registration",
+    "register.state": "You are ?",
+    "register.state.patient": "Patient",
+    "register.state.family": "Family member",
+    "register.state.nurse": "Nurse",
+    "register.state.doctor": "Doctor",
+    "register.name": "Name",
+    "register.surname": "Surname",
+    "register.submit": "Register",
+    "register.gender": "Gender",
+    "register.gender.man": "Man",
+    "register.gender.woman": "Woman",
+    "register.gender.other": "Other",
+    "register.dob": "Date of Birth",
+    "register.adress": "Adress",
+    "register.adress2": "Complement",
+    "register.postcode": "Postcode",
+    "register.city": "City",
+    "register.email": "Email",
+    "register.password": "Password",
+    "register.phone": "Phone"
+  }
+}
