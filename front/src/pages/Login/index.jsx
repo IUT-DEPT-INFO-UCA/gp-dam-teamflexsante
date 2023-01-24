@@ -2,15 +2,24 @@ import { Box, Button, Card, Grid, Link, TextField, Typography } from '@mui/mater
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { USER_LOGIN } from '../../redux/store/user/actions'
 
 const Login = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
-    console.log(data)
+    dispatch({
+      type: USER_LOGIN,
+      data: {
+        email: data.get('email'),
+        password: data.get('password')
+      }
+    })
   }
 
   const handleForgotPassword = () => {
@@ -70,15 +79,6 @@ const Login = () => {
               display: 'flex',
               flexDirection: 'column'
             }}>
-            <Link
-              onClick={handleForgotPassword}
-              variant="body2"
-              color="#000"
-              sx={{
-                cursor: 'pointer'
-              }}>
-              {t('login.forgotPassword')}
-            </Link>
             <Link
               onClick={handleRegister}
               variant="body2"
