@@ -157,6 +157,25 @@ describe('UserController', () => {
     expect(result2.result).toHaveProperty('email', UserMock.email);
   });
 
+  it('should generate data for patients', async () => {
+    const user = { ...UserMock };
+
+    const result = await controller.register(user);
+
+    await controller.generate();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    expect(registeredUser.result.health.heartRate.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.bloodPressure.length).toBeGreaterThan(
+      0,
+    );
+    expect(registeredUser.result.health.bloodOxygen.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.temperature.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.sleep.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.stress.length).toBeGreaterThan(0);
+  });
+
   afterEach(async () => {
     // drop database
     await database.dropDatabase();
