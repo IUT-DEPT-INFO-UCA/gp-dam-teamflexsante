@@ -46,6 +46,31 @@ export class UserController {
   }
 
   /**
+   * Generate 1 year of fake data for all the patient
+   * @returns a boolean
+   */
+  @Get('generate')
+  async generate() {
+    return {
+      message: 'Data generated',
+      result: await this.userService.generate(),
+    };
+  }
+
+  /**
+   * Get patient health data
+   * @param id patient user id
+   * @returns the patient health data
+   */
+  @Get('patient/:id')
+  async getPatientData(@Param('id') id: string) {
+    return {
+      message: 'Patient data found',
+      result: await this.userService.getPatientData(id),
+    };
+  }
+
+  /**
    * Get the user associated with the id
    * @param {string} id
    * @returns the user
