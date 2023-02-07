@@ -3,8 +3,6 @@ import { useSelector } from 'react-redux'
 import { useTranslation } from 'react-i18next'
 import { Box, Card, Divider, Typography } from '@mui/material'
 
-import './styles.css'
-
 const Account = () => {
   const { t } = useTranslation()
   const { user } = useSelector((state) => state.user)
