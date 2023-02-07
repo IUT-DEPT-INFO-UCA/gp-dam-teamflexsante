@@ -26,6 +26,19 @@
     "register.city": "City",
     "register.email": "Email",
     "register.password": "Password",
-    "register.phone": "Phone"
+    "register.phone": "Phone",
+    "healthInfo.title": "Health Informations",
+    "healthInfo.heartRate": "Heart rate",
+    "healthInfo.heartRate.unit": "bpm",
+    "healthInfo.bloodOxygen": "Blood oxygen",
+    "healthInfo.bloodOxygen.unit": "%",
+    "healthInfo.bloodPressure": "Blood pressure",
+    "healthInfo.bloodPressure.unit": "mmHg",
+    "healthInfo.sleep": "Sleep",
+    "healthInfo.sleep.unit": "h",
+    "healthInfo.stress": "Stress",
+    "healthInfo.stress.unit": "%",
+    "healthInfo.temperature": "Temperature",
+    "healthInfo.temperature.unit": "°C"
   }
 }
