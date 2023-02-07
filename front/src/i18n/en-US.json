@@ -26,6 +26,14 @@
     "register.city": "City",
     "register.email": "Email",
     "register.password": "Password",
-    "register.phone": "Phone"
+    "register.phone": "Phone",
+    "personalInfo.title": "Personal information",
+    "personalInfo.lastname": "Lastname",
+    "personalInfo.firstname": "Firstname",
+    "personalInfo.email": "Mail",
+    "personalInfo.phone": "Phone",
+    "personalInfo.address": "Address",
+    "personalInfo.sex": "Gender",
+    "personalInfo.age": "Age"
   }
 }
