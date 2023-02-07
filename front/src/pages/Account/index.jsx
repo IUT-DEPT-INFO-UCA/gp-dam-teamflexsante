@@ -1,97 +1,83 @@
-import React, { useState } from "react";
-import {
-  BottomNavigation,
-  BottomNavigationAction,
-  Box,
-  Paper,
-  Tab,
-  Tabs,
-} from "@mui/material";
-import PermIdentityIcon from "@mui/icons-material/PermIdentity";
-import BarChartIcon from "@mui/icons-material/BarChart";
+import { Box, Typography } from "@mui/material";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
-import HealthInfo from "../../components/HealthInfo";
-import PersonalInfo from "../../components/PersonalInfo";
-import useMobile from "../../utils/useMobile";
+import SimpleLineChart from "../SimpleLineChart";
+import TwoLinesChart from "../TwoLinesChart";
 
-import "./styles.css";
-
-function TabPanel(props) {
-  // eslint-disable-next-line react/prop-types
-  const { children, value, index, ...other } = props;
+const HealthInfo = (props) => {
+  const { t } = useTranslation();
+  const { user } = props;
 
   return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+        width: "100%",
+        backgroundColor: "background.default",
+      }}
     >
-      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
-  };
-}
-
-const Account = () => {
-  const [value, setValue] = useState(0);
-  const [bottomNavValue, setBottomNavValue] = useState(0);
-  const isMobile = useMobile();
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return isMobile ? (
-    <Box>
-      {bottomNavValue === 0 && <PersonalInfo />}
-      {bottomNavValue === 1 && <HealthInfo />}
-      <Paper
-        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-        elevation={3}
-      >
-        <BottomNavigation
-          showLabels
-          value={bottomNavValue}
-          onChange={(event, newValue) => {
-            setBottomNavValue(newValue);
-          }}
-        >
-          <BottomNavigationAction label="Infos" icon={<PermIdentityIcon />} />
-          <BottomNavigationAction label="Données" icon={<BarChartIcon />} />
-        </BottomNavigation>
-      </Paper>
-    </Box>
-  ) : (
-    <div>
+      <Typography component="h1" variant="h5">
+        {t("healthInfo.title")}
+      </Typography>
       <Box
-        className="AccountSelector"
-        sx={{ borderBottom: 1, borderColor: "divider" }}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          justifyContent: "space-around",
+          alignItems: "center",
+          height: "100%",
+          width: "100%",
+        }}
       >
-        <Tabs
-          value={value}
-          onChange={handleChange}
-          aria-label="basic tabs example"
-        >
-          <Tab label="Information Personnel" {...a11yProps(0)} />
-          <Tab label="Données de santé" {...a11yProps(1)} />
-        </Tabs>
+        <SimpleLineChart
+          data={user.health.heartRate}
+          title={t("healthInfo.heartRate")}
+          unit={t("healthInfo.heartRate.unit")}
+        />
+        <TwoLinesChart
+          data={user.health.bloodPressure}
+          title={t("healthInfo.bloodPressure")}
+          unit={t("healthInfo.bloodPressure.unit")}
+        />
+        <SimpleLineChart
+          data={user.health.bloodOxygen}
+          title={t("healthInfo.bloodOxygen")}
+          unit={t("healthInfo.bloodOxygen.unit")}
+        />
+        <SimpleLineChart
+          data={user.health.sleep}
+          title={t("healthInfo.sleep")}
+          unit={t("healthInfo.sleep.unit")}
+        />
+        <SimpleLineChart
+          data={user.health.stress}
+          title={t("healthInfo.stress")}
+          unit={t("healthInfo.stress.unit")}
+        />
+        <SimpleLineChart
+          data={user.health.temperature}
+          title={t("healthInfo.temperature")}
+          unit={t("healthInfo.temperature.unit")}
+        />
       </Box>
-      <TabPanel value={value} index={0}>
-        <PersonalInfo />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <HealthInfo />
-      </TabPanel>
-    </div>
+    </Box>
   );
 };
 
-export default Account;
+HealthInfo.propTypes = {
+  user: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  user: state.user.user,
+});
+
+const mapDispatchToProps = () => ({});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HealthInfo);
