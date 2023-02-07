@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { MongooseModule, getConnectionToken } from '@nestjs/mongoose';
 import { ConfigModule } from '@nestjs/config';
 
-import { User, UserSchema } from '../../schemas/user.schema';
+import { Role, User, UserSchema } from '../../schemas/user.schema';
 import { UserController } from './user.controller';
 import { UserMock } from './user.mock';
 import { UserService } from './user.service';
@@ -155,6 +155,59 @@ describe('UserController', () => {
 
     expect(result2.message).toBe('User found');
     expect(result2.result).toHaveProperty('email', UserMock.email);
+  });
+
+  it('should generate data for patients', async () => {
+    const user = { ...UserMock };
+
+    const result = await controller.register(user);
+
+    await controller.generate();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    expect(registeredUser.result.health.heartRate.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.bloodPressure.length).toBeGreaterThan(
+      0,
+    );
+    expect(registeredUser.result.health.bloodOxygen.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.temperature.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.sleep.length).toBeGreaterThan(0);
+    expect(registeredUser.result.health.stress.length).toBeGreaterThan(0);
+  });
+
+  it('should get data of patient', async () => {
+    const user = { ...UserMock };
+
+    const result = await controller.register(user);
+
+    await controller.generate();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    const result2 = await controller.getPatientData(registeredUser.result._id);
+
+    expect(result2.message).toBe('Patient data found');
+    expect(result2.result).toHaveProperty('heartRate');
+    expect(result2.result.heartRate.length).toBeGreaterThan(0);
+  });
+
+  it('should failed to get data for non patient user', async () => {
+    const user = { ...UserMock, role: Role.DOCTOR };
+
+    const result = await controller.register(user);
+
+    await controller.generate();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    try {
+      await controller.getPatientData(registeredUser.result._id);
+    } catch (error) {
+      expect(error).toBeInstanceOf(HttpException);
+      expect(error.status).toBe(400);
+      expect(error.message).toBe('User is not a patient');
+    }
   });
 
   afterEach(async () => {
