@@ -1,5 +1,9 @@
 {
   "translation": {
+    "home": "Home",
+    "app.name": "FlexSanté",
+    "header.login": "Login",
+    "header.account": "My account",
     "login.title": "Login",
     "login.email": "Email",
     "login.password": "Password",
@@ -27,13 +31,18 @@
     "register.email": "Email",
     "register.password": "Password",
     "register.phone": "Phone",
-    "personalInfo.title": "Personal information",
-    "personalInfo.lastname": "Lastname",
-    "personalInfo.firstname": "Firstname",
-    "personalInfo.email": "Mail",
-    "personalInfo.phone": "Phone",
-    "personalInfo.address": "Address",
-    "personalInfo.sex": "Gender",
-    "personalInfo.age": "Age"
+    "healthInfo.title": "Health Informations",
+    "healthInfo.heartRate": "Heart rate",
+    "healthInfo.heartRate.unit": "bpm",
+    "healthInfo.bloodOxygen": "Blood oxygen",
+    "healthInfo.bloodOxygen.unit": "%",
+    "healthInfo.bloodPressure": "Blood pressure",
+    "healthInfo.bloodPressure.unit": "mmHg",
+    "healthInfo.sleep": "Sleep",
+    "healthInfo.sleep.unit": "h",
+    "healthInfo.stress": "Stress",
+    "healthInfo.stress.unit": "%",
+    "healthInfo.temperature": "Temperature",
+    "healthInfo.temperature.unit": "°C"
   }
 }

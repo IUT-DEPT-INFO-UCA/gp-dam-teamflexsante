@@ -1,0 +1,10 @@
+.AccountSelector {
+  text-align: center;
+  -moz-box-align: center;
+}
+
+.css-1qyv1bh-MuiButtonBase-root-MuiTab-root.Mui-selected{
+  color: #45C2DD !important;
+  font-weight: bold !important;
+  font-style: italic !important;
+}

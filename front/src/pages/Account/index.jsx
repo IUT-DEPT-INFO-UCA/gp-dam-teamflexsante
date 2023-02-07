@@ -1,60 +1,97 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next'
-import { Box, Card, Divider, Typography } from '@mui/material'
+import React, { useState } from "react";
+import {
+  BottomNavigation,
+  BottomNavigationAction,
+  Box,
+  Paper,
+  Tab,
+  Tabs,
+} from "@mui/material";
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
+import BarChartIcon from "@mui/icons-material/BarChart";
 
-const Account = () => {
-  const { t } = useTranslation()
-  const { user } = useSelector((state) => state.user)
+import HealthInfo from "../../components/HealthInfo";
+import PersonalInfo from "../../components/PersonalInfo";
+import useMobile from "../../utils/useMobile";
 
-  const renderInfo = (label, value) => (
-    <>
-      <Typography component="p" variant="p">
-        {label}
-      </Typography>
-      <Typography component="h1" variant="h6">
-        {value}
-      </Typography>
-      <Divider className="divider" />
-    </>
-  )
+import "./styles.css";
+
+function TabPanel(props) {
+  // eslint-disable-next-line react/prop-types
+  const { children, value, index, ...other } = props;
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '80vh',
-        backgroundColor: 'background.default'
-      }}>
-      <Card
-        sx={{
-          width: '100%',
-          maxWidth: 600,
-          padding: 3
-        }}>
-          <Typography
-          component="h1"
-          variant="h4"
-          sx={{
-            marginBottom: 2
-          }}>
-          {t('personalInfo.title')}
-        </Typography>
-        {renderInfo(t('personalInfo.lastname'), user.lastname)}
-        {renderInfo(t('personalInfo.firstname'), user.firstname)}
-        {renderInfo(t('personalInfo.sex'), user.gender === 'men' ? 'Homme' : 'Femme')}
-        {renderInfo(
-          t('personalInfo.age'),
-          `${new Date().getFullYear() - new Date(user.birthdate).getFullYear()} ans`
-        )}
-        {renderInfo(t('personalInfo.email'), user.email)}
-        {renderInfo(t('personalInfo.phone'), user.phone)}
-        {renderInfo(t('personalInfo.address'), user.address)}
-      </Card>
-    </Box>
-  )
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`simple-tabpanel-${index}`}
+      aria-labelledby={`simple-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
+    </div>
+  );
 }
 
-export default Account
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+
+const Account = () => {
+  const [value, setValue] = useState(0);
+  const [bottomNavValue, setBottomNavValue] = useState(0);
+  const isMobile = useMobile();
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return isMobile ? (
+    <Box>
+      {bottomNavValue === 0 && <PersonalInfo />}
+      {bottomNavValue === 1 && <HealthInfo />}
+      <Paper
+        sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+        elevation={3}
+      >
+        <BottomNavigation
+          showLabels
+          value={bottomNavValue}
+          onChange={(event, newValue) => {
+            setBottomNavValue(newValue);
+          }}
+        >
+          <BottomNavigationAction label="Infos" icon={<PermIdentityIcon />} />
+          <BottomNavigationAction label="Données" icon={<BarChartIcon />} />
+        </BottomNavigation>
+      </Paper>
+    </Box>
+  ) : (
+    <div>
+      <Box
+        className="AccountSelector"
+        sx={{ borderBottom: 1, borderColor: "divider" }}
+      >
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          aria-label="basic tabs example"
+        >
+          <Tab label="Information Personnel" {...a11yProps(0)} />
+          <Tab label="Données de santé" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+      <TabPanel value={value} index={0}>
+        <PersonalInfo />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <HealthInfo />
+      </TabPanel>
+    </div>
+  );
+};
+
+export default Account;
