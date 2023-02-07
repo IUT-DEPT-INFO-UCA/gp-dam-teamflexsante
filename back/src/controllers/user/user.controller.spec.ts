@@ -176,6 +176,22 @@ describe('UserController', () => {
     expect(registeredUser.result.health.stress.length).toBeGreaterThan(0);
   });
 
+  it('should get data of patient', async () => {
+    const user = { ...UserMock };
+
+    const result = await controller.register(user);
+
+    await controller.generate();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    const result2 = await controller.getPatientData(registeredUser.result._id);
+
+    expect(result2.message).toBe('Patient data found');
+    expect(result2.result).toHaveProperty('heartRate');
+    expect(result2.result.heartRate.length).toBeGreaterThan(0);
+  });
+
   afterEach(async () => {
     // drop database
     await database.dropDatabase();
