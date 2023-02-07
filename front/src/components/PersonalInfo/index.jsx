@@ -1,14 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Box, Button, Card, Divider, Typography } from "@mui/material";
+import { USER_LOGOUT } from "../../redux/store/user/actions";
 
 const PersonalInfo = () => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
   const handleDisconnect = () => {
-    console.log("disconnect");
+    dispatch({ type: USER_LOGOUT });
   };
 
   const renderInfo = (label, value) => (
