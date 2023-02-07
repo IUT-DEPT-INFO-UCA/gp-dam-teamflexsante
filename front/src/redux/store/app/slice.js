@@ -1,21 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit";
 
 const appSlice = createSlice({
-  name: 'app',
+  name: "app",
   initialState: {
-    validation: '',
-    error: ''
+    validation: "",
+    error: "",
   },
   reducers: {
+    SET_VALIDATION: (state, action) => {
+      state.validation = action.payload;
+    },
+    SET_ERROR: (state, action) => {
+      state.error = action.payload;
+    },
     CLEAR_ERROR: (state) => {
-      state.error = ''
+      state.error = "";
     },
     CLEAR_VALIDATION: (state) => {
-      state.validation = ''
-    }
-  }
-})
+      state.validation = "";
+    },
+  },
+});
 
-export const { CLEAR_ERROR, CLEAR_VALIDATION } = appSlice.actions
+export const { CLEAR_ERROR, CLEAR_VALIDATION, SET_VALIDATION, SET_ERROR } =
+  appSlice.actions;
 
-export default appSlice.reducer
+export default appSlice.reducer;

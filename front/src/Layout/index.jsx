@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import React, { useEffect, useMemo } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { unstable_HistoryRouter as HistoryRouter } from "react-router-dom";
 
 import { connect } from "react-redux";
@@ -13,9 +13,10 @@ import history from "../router/history";
 import Error from "../components/Error";
 import Validation from "../components/Validation";
 import Login from "../pages/Login";
+import Header from "../components/Header";
 import Register from "../pages/Register";
 import Account from "../pages/Account";
-import Header from "../components/Header";
+import GuardedRoute from "../router/GuardedRoute";
 
 const Layout = (props) => {
   const { validation, error, resetError, resetValidation, user, reloadUser } =
@@ -34,16 +35,26 @@ const Layout = (props) => {
     }, 5000);
   }
 
+  const renderRoutes = useMemo(() => {
+    return (
+      <Routes>
+        <Route path={routes.login} element={<Login />} />
+        <Route path={routes.register} element={<Register />} />
+        <Route
+          path={routes.account}
+          element={<GuardedRoute component={Account} auth={user !== null} />}
+        />
+        <Route path="*" element={<Navigate to={routes.account} />} />
+      </Routes>
+    );
+  }, [user]);
+
   return (
     <HistoryRouter history={history}>
       <Validation validation={validation} resetValidation={resetValidation} />
       <Error error={error} resetError={resetError} />
       <Header isConnected={user !== null} user={user} />
-      <Routes>
-        <Route path={routes.login} element={<Login />} />
-        <Route path={routes.register} element={<Register />} />
-        <Route path={routes.account} element={<Account />} />
-      </Routes>
+      {renderRoutes}
     </HistoryRouter>
   );
 };
