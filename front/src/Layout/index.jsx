@@ -15,6 +15,7 @@ import Validation from "../components/Validation";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Account from "../pages/Account";
+import Header from "../components/Header";
 
 const Layout = (props) => {
   const { validation, error, resetError, resetValidation, user, reloadUser } =
@@ -37,6 +38,7 @@ const Layout = (props) => {
     <HistoryRouter history={history}>
       <Validation validation={validation} resetValidation={resetValidation} />
       <Error error={error} resetError={resetError} />
+      <Header isConnected={user !== null} user={user} />
       <Routes>
         <Route path={routes.login} element={<Login />} />
         <Route path={routes.register} element={<Register />} />

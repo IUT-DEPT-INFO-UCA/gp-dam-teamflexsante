@@ -1,5 +1,9 @@
 {
   "translation": {
+    "home": "Home",
+    "app.name": "FlexSanté",
+    "header.login": "Login",
+    "header.account": "My account",
     "login.title": "Login",
     "login.email": "Email",
     "login.password": "Password",
