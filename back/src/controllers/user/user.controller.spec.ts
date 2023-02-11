@@ -161,5 +161,6 @@ describe('UserController', () => {
     // drop database
     await database.dropDatabase();
     await database.close();
+    
   });
 });
