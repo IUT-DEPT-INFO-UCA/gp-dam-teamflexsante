@@ -10,6 +10,7 @@ import { HttpException } from '@nestjs/common';
 
 describe('UserController', () => {
   let controller: UserController;
+  let service: UserService;
   let database: any;
 
   beforeEach(async () => {
@@ -26,6 +27,7 @@ describe('UserController', () => {
     }).compile();
 
     controller = module.get<UserController>(UserController);
+    service = module.get<UserService>(UserService);
     database = await module.get(getConnectionToken());
   });
 
@@ -174,6 +176,19 @@ describe('UserController', () => {
     expect(registeredUser.result.health.temperature.length).toBeGreaterThan(0);
     expect(registeredUser.result.health.sleep.length).toBeGreaterThan(0);
     expect(registeredUser.result.health.stress.length).toBeGreaterThan(0);
+    expect(service.controlPatientData(registeredUser.result)).toBe(true);
+  });
+
+  it('should generate strange data for patients and detect it', async () => {
+    const user = { ...UserMock };
+
+    const result = await controller.register(user);
+
+    await service.generateStrangeData();
+
+    const registeredUser = await controller.getUserById(result.result._id);
+
+    expect(service.controlPatientData(registeredUser.result)).toBe(false);
   });
 
   it('should get data of patient', async () => {
