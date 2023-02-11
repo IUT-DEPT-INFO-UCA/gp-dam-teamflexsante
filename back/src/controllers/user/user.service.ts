@@ -7,7 +7,11 @@ import { UserInterface, UserLoginInterface } from './user.interface';
 import { Health, Role, User, UserDocument } from '../../schemas/user.schema';
 import { generateRandomToken } from '../../utils/token';
 import { checkPasswordStrength } from '../../utils/validation';
-import { generateRandomFeelingData } from '../../utils/data';
+import {
+  controlRandomData,
+  generateRandomData,
+  generateStrangeData,
+} from '../../utils/data';
 
 const saltOrRounds = 10;
 
@@ -98,7 +102,7 @@ export class UserService {
 
       await Promise.all(
         patients.map(async (patient) => {
-          const healthData = generateRandomFeelingData();
+          const healthData = generateRandomData();
           patient.health = healthData;
           patient.markModified('health');
           return patient.save();
@@ -109,6 +113,31 @@ export class UserService {
       console.log(error);
       return false;
     }
+  }
+
+  async generateStrangeData(): Promise<boolean> {
+    try {
+      const patients = await this.userModel.find({ role: Role.PATIENT });
+
+      await Promise.all(
+        patients.map(async (patient) => {
+          const healthData = generateStrangeData();
+          patient.health = healthData;
+          patient.markModified('health');
+          return patient.save();
+        }),
+      );
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  }
+
+  controlPatientData(patient: UserDocument): boolean {
+    const { health } = patient;
+
+    return controlRandomData(health);
   }
 
   /**
